@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="场景：文件较大时，展示下载进度条；埋点时获取下载所需时间…">
+  <meta name="description" content="浏览器的画中画功能允许在一个小窗口中播放页面中的视频，而且标签页隐藏小窗口依然显示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何获取下载时间">
-<meta property="og:url" content="http://example.com/2021/11/15/get-down-time/index.html">
+<meta property="og:title" content="浏览器画中画功能">
+<meta property="og:url" content="http://example.com/2021/11/22/picture-in-picture/index.html">
 <meta property="og:site_name" content="河豚的博客">
-<meta property="og:description" content="场景：文件较大时，展示下载进度条；埋点时获取下载所需时间…">
+<meta property="og:description" content="浏览器的画中画功能允许在一个小窗口中播放页面中的视频，而且标签页隐藏小窗口依然显示。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-15T14:40:15.561Z">
-<meta property="article:modified_time" content="2021-11-15T14:44:53.075Z">
+<meta property="article:published_time" content="2021-11-22T12:44:31.326Z">
+<meta property="article:modified_time" content="2021-11-22T12:50:18.467Z">
 <meta property="article:author" content="河豚">
-<meta property="article:tag" content="axios">
+<meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/11/15/get-down-time/">
+<link rel="canonical" href="http://example.com/2021/11/22/picture-in-picture/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>如何获取下载时间 | 河豚的博客</title>
+  <title>浏览器画中画功能 | 河豚的博客</title>
   
 
 
@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/get-down-time/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/22/picture-in-picture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何获取下载时间
+          浏览器画中画功能
         </h1>
 
         <div class="post-meta">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-11-15 22:40:15 / 修改时间：22:44:53" itemprop="dateCreated datePublished" datetime="2021-11-15T22:40:15+08:00">2021-11-15</time>
+              <time title="创建时间：2021-11-22 20:44:31 / 修改时间：20:50:18" itemprop="dateCreated datePublished" datetime="2021-11-22T20:44:31+08:00">2021-11-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +221,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82/" itemprop="url" rel="index"><span itemprop="name">接口请求</span></a>
+                  <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">js</span></a>
                 </span>
             </span>
 
@@ -236,13 +236,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>场景：文件较大时，展示下载进度条；埋点时获取下载所需时间…</p>
+        <p>浏览器的画中画功能允许在一个小窗口中播放页面中的视频，而且标签页隐藏小窗口依然显示。</p>
 <span id="more"></span>
 
-<p>方法：借助 promise 链式调用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> time1 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">axios(url, params).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  res</span><br><span class="line">    .blob()</span><br><span class="line">    .then(<span class="function"><span class="params">blob</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 保存文件到本地...</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> time2 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">      <span class="built_in">console</span>.log(time2 - time1);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>谷歌浏览器默认支持画中画功能，用户可以在控制栏中打开或关闭画中画功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
 
-<p>总结：获取的时间是从服务器请求文件的时间，不包含保存到本地的时间。打印时间的时候，正好弹出选择文件下载位置弹窗。</p>
+<h3 id="如何自动控制画中画功能？"><a href="#如何自动控制画中画功能？" class="headerlink" title="如何自动控制画中画功能？"></a>如何自动控制画中画功能？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;video id=<span class="string">&quot;video&quot;</span> src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>开启/关闭画中画<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.video === <span class="built_in">document</span>.pictureInPictureElement) &#123;</span><br><span class="line">      <span class="built_in">document</span>.exitPictureInPicture();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.video.requestPictureInPicture();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>document.pictureInPictureElement</code>：画中画功能开启时指向<code>&lt;video&gt;</code>，关闭时指向 null<br><code>document.exitPictureInPicture</code>：关闭画中画功能，异步操作<br><code>video.requestPictureInPicture</code>：打开画中画功能，异步操作</p>
+<h3 id="如何监听打开或关闭画中画操作？"><a href="#如何监听打开或关闭画中画操作？" class="headerlink" title="如何监听打开或关闭画中画操作？"></a>如何监听打开或关闭画中画操作？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;enterpictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;on&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;leavepictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;off&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何判断是否能使用画中画功能？"><a href="#如何判断是否能使用画中画功能？" class="headerlink" title="如何判断是否能使用画中画功能？"></a>如何判断是否能使用画中画功能？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(<span class="string">&quot;pictureInPictureEnabled&quot;</span> <span class="keyword">in</span> <span class="built_in">document</span>)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;浏览器不支持&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">document</span>.pictureInPictureEnabled) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;画中画功能不可用&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -252,7 +257,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/axios/" rel="tag"># axios</a>
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag"># 浏览器</a>
           </div>
 
         
@@ -261,13 +266,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/28/copy/" rel="prev" title="复制粘贴相关API">
-      <i class="fa fa-chevron-left"></i> 复制粘贴相关API
+    <a href="/2021/11/15/hue-rotate/" rel="prev" title="神奇的色调旋转滤镜hue-rotate">
+      <i class="fa fa-chevron-left"></i> 神奇的色调旋转滤镜hue-rotate
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/15/hue-rotate/" rel="next" title="神奇的色调旋转滤镜hue-rotate">
-      神奇的色调旋转滤镜hue-rotate <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -326,6 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%94%BB%E4%B8%AD%E7%94%BB%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">如何自动控制画中画功能？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%E6%89%93%E5%BC%80%E6%88%96%E5%85%B3%E9%97%AD%E7%94%BB%E4%B8%AD%E7%94%BB%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">如何监听打开或关闭画中画操作？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%83%BD%E4%BD%BF%E7%94%A8%E7%94%BB%E4%B8%AD%E7%94%BB%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如何判断是否能使用画中画功能？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
