@@ -250,29 +250,6 @@
       </tags>
   </entry>
   <entry>
-    <title>浏览器画中画功能</title>
-    <url>/2021/11/22/picture-in-picture/</url>
-    <content><![CDATA[<p>浏览器的画中画功能允许在一个小窗口中播放页面中的视频，而且标签页隐藏小窗口依然显示。</p>
-<span id="more"></span>
-
-<p>谷歌浏览器默认支持画中画功能，用户可以在控制栏中打开或关闭画中画功能。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;video src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何自动控制画中画功能？"><a href="#如何自动控制画中画功能？" class="headerlink" title="如何自动控制画中画功能？"></a>如何自动控制画中画功能？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;video id=<span class="string">&quot;video&quot;</span> src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>开启/关闭画中画<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.video === <span class="built_in">document</span>.pictureInPictureElement) &#123;</span><br><span class="line">      <span class="built_in">document</span>.exitPictureInPicture();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.video.requestPictureInPicture();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><code>document.pictureInPictureElement</code>：画中画功能开启时指向<code>&lt;video&gt;</code>，关闭时指向 null<br><code>document.exitPictureInPicture</code>：关闭画中画功能，异步操作<br><code>video.requestPictureInPicture</code>：打开画中画功能，异步操作</p>
-<h3 id="如何监听打开或关闭画中画操作？"><a href="#如何监听打开或关闭画中画操作？" class="headerlink" title="如何监听打开或关闭画中画操作？"></a>如何监听打开或关闭画中画操作？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;enterpictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;on&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;leavepictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;off&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何判断是否能使用画中画功能？"><a href="#如何判断是否能使用画中画功能？" class="headerlink" title="如何判断是否能使用画中画功能？"></a>如何判断是否能使用画中画功能？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(<span class="string">&quot;pictureInPictureEnabled&quot;</span> <span class="keyword">in</span> <span class="built_in">document</span>)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;浏览器不支持&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">document</span>.pictureInPictureEnabled) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;画中画功能不可用&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>proxy 504 的原因以及解决办法</title>
     <url>/2021/10/26/proxy504/</url>
     <content><![CDATA[<p>在开发中可能会碰到接口报错 <strong>504 Gateway Time-out</strong> 的情况，在此记录一下如何解决这个问题。</p>
@@ -311,6 +288,29 @@
         <tag>axios</tag>
         <tag>request</tag>
         <tag>promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浏览器画中画功能</title>
+    <url>/2021/11/22/picture-in-picture/</url>
+    <content><![CDATA[<p>浏览器的画中画功能允许在一个小窗口中播放页面中的视频，而且标签页隐藏小窗口依然显示。</p>
+<span id="more"></span>
+
+<p>谷歌浏览器默认支持画中画功能，用户可以在控制栏中打开或关闭画中画功能。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;video src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何自动控制画中画功能？"><a href="#如何自动控制画中画功能？" class="headerlink" title="如何自动控制画中画功能？"></a>如何自动控制画中画功能？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;video id=<span class="string">&quot;video&quot;</span> src=<span class="string">&quot;./video1.mp4&quot;</span> controls&gt;&lt;/video&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>开启/关闭画中画<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.video === <span class="built_in">document</span>.pictureInPictureElement) &#123;</span><br><span class="line">      <span class="built_in">document</span>.exitPictureInPicture();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.video.requestPictureInPicture();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>document.pictureInPictureElement</code>：画中画功能开启时指向<code>&lt;video&gt;</code>，关闭时指向 null<br><code>document.exitPictureInPicture</code>：关闭画中画功能，异步操作<br><code>video.requestPictureInPicture</code>：打开画中画功能，异步操作</p>
+<h3 id="如何监听打开或关闭画中画操作？"><a href="#如何监听打开或关闭画中画操作？" class="headerlink" title="如何监听打开或关闭画中画操作？"></a>如何监听打开或关闭画中画操作？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;enterpictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;on&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.video.addEventListener(<span class="string">&quot;leavepictureinpicture&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;off&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何判断是否能使用画中画功能？"><a href="#如何判断是否能使用画中画功能？" class="headerlink" title="如何判断是否能使用画中画功能？"></a>如何判断是否能使用画中画功能？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(<span class="string">&quot;pictureInPictureEnabled&quot;</span> <span class="keyword">in</span> <span class="built_in">document</span>)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;浏览器不支持&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">document</span>.pictureInPictureEnabled) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;画中画功能不可用&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
       </tags>
   </entry>
 </search>
