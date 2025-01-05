@@ -68,7 +68,6 @@
 ]]></content>
       <categories>
         <category>HTML</category>
-        <category>CSS</category>
       </categories>
       <tags>
         <tag>canvas</tag>
@@ -204,6 +203,32 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS变量和CSS函数</title>
+    <url>/2024/09/23/css-var-func/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CSS变量和CSS函数可以帮助开发者方便地实现功能。</p>
+<h1 id="CSS变量"><a href="#CSS变量" class="headerlink" title="CSS变量"></a>CSS变量</h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attr">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CSS变量名以–开头；<br>变量可以继承父元素的值；<br>var第2个参数为备用值，变量不生效时被使用；</p>
+<h1 id="CSS函数"><a href="#CSS函数" class="headerlink" title="CSS函数"></a>CSS函数</h1><p>常用的css函数包括：calc()、linear-gradient()、translate(), rotate(), scale()、rgba()、hsla()、attr()、clamp()、min()、max()。  </p>
+<h2 id="calc-执行计算"><a href="#calc-执行计算" class="headerlink" title="calc()执行计算"></a>calc()执行计算</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">30px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="linear-gradient-创建一个线性渐变"><a href="#linear-gradient-创建一个线性渐变" class="headerlink" title="linear-gradient()创建一个线性渐变"></a>linear-gradient()创建一个线性渐变</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, red, yellow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="transform函数改变元素的形状、位置和尺寸"><a href="#transform函数改变元素的形状、位置和尺寸" class="headerlink" title="transform函数改变元素的形状、位置和尺寸"></a>transform函数改变元素的形状、位置和尺寸</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.moved</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">50px</span>, <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="rgba-、hsla-定义颜色"><a href="#rgba-、hsla-定义颜色" class="headerlink" title="rgba()、hsla()定义颜色"></a>rgba()、hsla()定义颜色</h2><p>rgba(红，绿，蓝，透明度)<br>hsla(色调，饱和度，亮度，透明度)  </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">99</span>, <span class="number">71</span>, <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="attr-引用元素的属性值"><a href="#attr-引用元素的属性值" class="headerlink" title="attr()引用元素的属性值"></a>attr()引用元素的属性值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-tooltip);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="clamp-限制一个值在一个特定范围内"><a href="#clamp-限制一个值在一个特定范围内" class="headerlink" title="clamp()限制一个值在一个特定范围内"></a>clamp()限制一个值在一个特定范围内</h2><p>它接受三个参数：最小值、优选值和最大值。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">clamp</span>(<span class="number">2rem</span>, <span class="number">4vw</span> + <span class="number">1rem</span>, <span class="number">8rem</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数的工作方式是：如果优选值小于最小值，那么返回最小值；如果优选值大于最大值，那么返回最大值；如果优选值在最小值和最大值之间，那么返回优选值。<br>例如，font-size: clamp(12px, 5vw, 24px); 这个 CSS 规则会设置字体大小为视口宽度的 5%，但是不会小于 12px，也不会大于 24px。这在响应式设计中非常有用，可以确保元素的大小在不同的设备和屏幕尺寸上都能保持合适的比例，同时也不会过小或过大。   </p>
+<h2 id="min-、max-返回一组数值中最小或最大一个值"><a href="#min-、max-返回一组数值中最小或最大一个值" class="headerlink" title="min()、max()返回一组数值中最小或最大一个值"></a>min()、max()返回一组数值中最小或最大一个值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">min</span>(<span class="number">100%</span>, <span class="number">600px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参数的类型：<br>&lt;length&gt;：长度值，如 px, em, rem, vw, vh 等。<br>&lt;number&gt;：数字值。<br>&lt;percentage&gt;：百分比。<br>&lt;calc()&gt;：另一个 calc() 函数的表达式。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>💐Docker基础知识总结</title>
     <url>/2024/09/02/docker-tutorial/</url>
     <content><![CDATA[<h1 id="1-docker的作用"><a href="#1-docker的作用" class="headerlink" title="1.docker的作用"></a>1.docker的作用</h1><p>打包、分发、部署<br>打包：就是把你软件运行所需的依赖、第三方库、软件打包到一起，变成一个安装包；<br>分发：你可以把你打包好的“安装包”上传到一个镜像仓库，其他人可以非常方便的获取和安装；<br>部署：拿着“安装包”就可以一个命令运行起来你的应用，自动模拟出一模一样的运行环境，不管是在 Windows&#x2F;Mac&#x2F;Linux。   </p>
@@ -238,32 +263,6 @@
       </categories>
       <tags>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS变量和CSS函数</title>
-    <url>/2024/09/23/css-var-func/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CSS变量和CSS函数可以帮助开发者方便地实现功能。</p>
-<h1 id="CSS变量"><a href="#CSS变量" class="headerlink" title="CSS变量"></a>CSS变量</h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attr">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CSS变量名以–开头；<br>变量可以继承父元素的值；<br>var第2个参数为备用值，变量不生效时被使用；</p>
-<h1 id="CSS函数"><a href="#CSS函数" class="headerlink" title="CSS函数"></a>CSS函数</h1><p>常用的css函数包括：calc()、linear-gradient()、translate(), rotate(), scale()、rgba()、hsla()、attr()、clamp()、min()、max()。  </p>
-<h2 id="calc-执行计算"><a href="#calc-执行计算" class="headerlink" title="calc()执行计算"></a>calc()执行计算</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">30px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="linear-gradient-创建一个线性渐变"><a href="#linear-gradient-创建一个线性渐变" class="headerlink" title="linear-gradient()创建一个线性渐变"></a>linear-gradient()创建一个线性渐变</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, red, yellow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="transform函数改变元素的形状、位置和尺寸"><a href="#transform函数改变元素的形状、位置和尺寸" class="headerlink" title="transform函数改变元素的形状、位置和尺寸"></a>transform函数改变元素的形状、位置和尺寸</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.moved</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">50px</span>, <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="rgba-、hsla-定义颜色"><a href="#rgba-、hsla-定义颜色" class="headerlink" title="rgba()、hsla()定义颜色"></a>rgba()、hsla()定义颜色</h2><p>rgba(红，绿，蓝，透明度)<br>hsla(色调，饱和度，亮度，透明度)  </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">99</span>, <span class="number">71</span>, <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="attr-引用元素的属性值"><a href="#attr-引用元素的属性值" class="headerlink" title="attr()引用元素的属性值"></a>attr()引用元素的属性值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-tooltip);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="clamp-限制一个值在一个特定范围内"><a href="#clamp-限制一个值在一个特定范围内" class="headerlink" title="clamp()限制一个值在一个特定范围内"></a>clamp()限制一个值在一个特定范围内</h2><p>它接受三个参数：最小值、优选值和最大值。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">clamp</span>(<span class="number">2rem</span>, <span class="number">4vw</span> + <span class="number">1rem</span>, <span class="number">8rem</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个函数的工作方式是：如果优选值小于最小值，那么返回最小值；如果优选值大于最大值，那么返回最大值；如果优选值在最小值和最大值之间，那么返回优选值。<br>例如，font-size: clamp(12px, 5vw, 24px); 这个 CSS 规则会设置字体大小为视口宽度的 5%，但是不会小于 12px，也不会大于 24px。这在响应式设计中非常有用，可以确保元素的大小在不同的设备和屏幕尺寸上都能保持合适的比例，同时也不会过小或过大。   </p>
-<h2 id="min-、max-返回一组数值中最小或最大一个值"><a href="#min-、max-返回一组数值中最小或最大一个值" class="headerlink" title="min()、max()返回一组数值中最小或最大一个值"></a>min()、max()返回一组数值中最小或最大一个值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">min</span>(<span class="number">100%</span>, <span class="number">600px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>参数的类型：<br>&lt;length&gt;：长度值，如 px, em, rem, vw, vh 等。<br>&lt;number&gt;：数字值。<br>&lt;percentage&gt;：百分比。<br>&lt;calc()&gt;：另一个 calc() 函数的表达式。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS语法</tag>
       </tags>
   </entry>
   <entry>
@@ -321,6 +320,25 @@
       </tags>
   </entry>
   <entry>
+    <title>git LFS解决大文件上传</title>
+    <url>/2024/02/04/git-lfs/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>git 限制上传文件大小在 100M 以内。在日常工作中，偶尔会遇到某次提交的文件总量过大或者某个文件过大，所以在此记录一下如何解决这个问题。</p>
+<h1 id="分批次提交"><a href="#分批次提交" class="headerlink" title="分批次提交"></a>分批次提交</h1><p>如果是提交很多文件，但单文件都不大的时候，可以选择分批次提交。如果已经 commit 才发现文件总量过大，则需要撤销 commit 。以下是会用到的 git 命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog 查看所有操作的历史记录</span><br><span class="line">git reset HEAD^2 上上一个版本</span><br><span class="line">git reset @~ 撤销一次commit</span><br></pre></td></tr></table></figure>
+<p>如果仅撤销上一次，则直接用第3条命令。<br>如果在尝试解决问题时进行了多次 commit，则可以通过第1条命令查询想要回退到的版本，然后通过第2条命令回退。</p>
+<h1 id="LFS"><a href="#LFS" class="headerlink" title="LFS"></a>LFS</h1><p>首先，下载<a href="https://git-lfs.com/">git LFS</a>。<br>然后，关联需要用 LFS 上传的文件，比如下面的命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git lfs track <span class="string">&#x27;xx.mp4&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>最后，按照正常的提交流程进行提交。</p>
+<p>以下是可能用到的命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关联某类型文件</span></span><br><span class="line">git lfs track <span class="string">&#x27;*.mp4&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找大于 nM 的文件</span></span><br><span class="line">find ./ -size +100M</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的第一篇源码阅读之fetch-event-source</title>
     <url>/2023/09/16/fetch-event-source/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>终于遇到一个简单的库来学习它的源码了。这个项目只有2个主要文件，代码加起来不到500行，是真的很mini了。<br>客户端向服务端发起请求用<code>xhr</code>或<code>fetch</code>，客户端与服务端双向通信用<code>websocket</code>，而服务端主动发起请求用<code>sse</code>。<code>chatGPT</code>就是用<code>sse</code>回复提问的。<br><code>window</code>中有一个叫<code>EventSource</code>的构造函数。一个<code>EventSource</code>实例会对服务器开启一个持久化的连接，以<code>text/event-stream</code>格式发送事件，此连接会一直保持开启直到通过调用<code>EventSource.close()</code>关闭。但使用<code>EventSource</code>时只能把参数加到<code>url</code>后面，而且也不能像<code>fetch</code>请求那样设置<code>header</code>等参数。借助<code>fetch-event-source</code>这个库就可以像发起<code>fetch</code>请求一样发起服务器单向通信请求。</p>
@@ -358,30 +376,10 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><code>getBytes</code>的第2个参数是<code>getLines</code>的返回值，<code>getLines</code>的参数又是<code>getMessages</code>的返回值，嵌套的比较深。<br><code>onChunk</code>将字节块切割成一行一行的字节，涉及字节数据的知识。</p>
 ]]></content>
       <categories>
-        <category>请求</category>
-        <category>源码学习</category>
+        <category>源码</category>
       </categories>
       <tags>
         <tag>SSE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git LFS解决大文件上传</title>
-    <url>/2024/02/04/git-lfs/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>git 限制上传文件大小在 100M 以内。在日常工作中，偶尔会遇到某次提交的文件总量过大或者某个文件过大，所以在此记录一下如何解决这个问题。</p>
-<h1 id="分批次提交"><a href="#分批次提交" class="headerlink" title="分批次提交"></a>分批次提交</h1><p>如果是提交很多文件，但单文件都不大的时候，可以选择分批次提交。如果已经 commit 才发现文件总量过大，则需要撤销 commit 。以下是会用到的 git 命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog 查看所有操作的历史记录</span><br><span class="line">git reset HEAD^2 上上一个版本</span><br><span class="line">git reset @~ 撤销一次commit</span><br></pre></td></tr></table></figure>
-<p>如果仅撤销上一次，则直接用第3条命令。<br>如果在尝试解决问题时进行了多次 commit，则可以通过第1条命令查询想要回退到的版本，然后通过第2条命令回退。</p>
-<h1 id="LFS"><a href="#LFS" class="headerlink" title="LFS"></a>LFS</h1><p>首先，下载<a href="https://git-lfs.com/">git LFS</a>。<br>然后，关联需要用 LFS 上传的文件，比如下面的命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git lfs track <span class="string">&#x27;xx.mp4&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>最后，按照正常的提交流程进行提交。</p>
-<p>以下是可能用到的命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关联某类型文件</span></span><br><span class="line">git lfs track <span class="string">&#x27;*.mp4&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找大于 nM 的文件</span></span><br><span class="line">find ./ -size +100M</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -953,7 +951,6 @@ fadeOut(alpha) &#123;
 <p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/3aa13c5da7ea435998ff9c2ac28314c5~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image.png"></p>
 ]]></content>
       <categories>
-        <category>请求</category>
         <category>bug</category>
       </categories>
       <tags>
@@ -1046,36 +1043,10 @@ fadeOut(alpha) &#123;
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.svg-wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>bug</category>
-        <category>CSS</category>
       </categories>
       <tags>
         <tag>svg</tag>
         <tag>cursor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>🧐文本溢出+完整内容提示</title>
-    <url>/2024/09/25/text-ellipsis/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在开发中，经常会遇到超出省略并显示…的需求。有时，还需要做到在鼠标移入的时候显示具体内容。这些都很简单，但如果要实现“<strong>文本如果超出就在鼠标移入时显示具体内容，文本不超出鼠标移入就不显示</strong>”，就有一点点麻烦。而且，文本长度通常不固定，需要这种处理的文本有多个。所以，在此总结一下如何实现这个功能。</p>
-<h1 id="文本超出显示…"><a href="#文本超出显示…" class="headerlink" title="文本超出显示…"></a>文本超出显示…</h1><p>分为单行文本和多行文本2种情况，代码如下所示。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 单行文本</span><br><span class="line"><span class="selector-class">.text-single</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 多行文本</span><br><span class="line"><span class="selector-class">.text-multi</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  -webkit-<span class="selector-tag">line</span>-clamp: <span class="number">2</span>;</span><br><span class="line">  -webkit-<span class="attribute">box-orient</span>: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="方法一：根据scrollWidth和offsetWidth判断是否显示tooltip"><a href="#方法一：根据scrollWidth和offsetWidth判断是否显示tooltip" class="headerlink" title="方法一：根据scrollWidth和offsetWidth判断是否显示tooltip"></a>方法一：根据scrollWidth和offsetWidth判断是否显示tooltip</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in info&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-tooltip</span> <span class="attr">:visible</span>=<span class="string">&quot;nameVisible[item.key]&quot;</span> <span class="attr">:content</span>=<span class="string">&quot;item.content&quot;</span> <span class="attr">placement</span>=<span class="string">&quot;top&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> @<span class="attr">mouseenter</span>=<span class="string">&quot;(e: any) =&gt; handleMouseEnterName(e, item.key)&quot;</span> @<span class="attr">mouseleave</span>=<span class="string">&quot;handleMouseLeaveName(item.key)&quot;</span>&gt;</span></span><br><span class="line">        &#123;&#123; item.content &#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-tooltip</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">function handleMouseEnter(e: any, key: string) &#123;</span><br><span class="line">  if (e.target.scrollWidth &gt; e.target.clientWidth) &#123;</span><br><span class="line">    nameVisible.value[key] = true;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    nameVisible.value[key] = false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function handleMouseLeave(key: string) &#123;</span><br><span class="line">  nameVisible.value[key] = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="方法二：借助title属性"><a href="#方法二：借助title属性" class="headerlink" title="方法二：借助title属性"></a>方法二：借助title属性</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">title</span>=<span class="string">&quot;this is title&quot;</span>&gt;</span>show title when hover<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>仅设置title属性还达不到想要的效果，而且不能修改title的样式。<br>如果要实现想要的效果，具体思路如下：用2份相同的文本A和B，B设置title属性，并且上移N行，父元素设置超出不显示。单行省略时N是2，超出2行省略时N是4。<br>原因：假设单行省略，B上移2行后，如果文本只有一行，B移出了父元素范围不显示，鼠标移入A不显示title；如果文本有多行，B覆盖了A，鼠标移入显示title。</p>
-<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/73dea461a6644cefa6eb83e02723d14c~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5rKz6LGa6byT6byT:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiNjM4MTYxNDYwNDAzMjg3In0=&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1727360824&x-orig-sign=q3n2O7WUPkXjjIBDSx0zrSdXVXA=" alt="633840727-9c53a45a583a5b50_fix732.webp"></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;txt&quot;</span>&gt;</span>元素会被移出正常文档流，并不为元素预留<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span> <span class="attr">title</span>=<span class="string">&quot;元素会被移出正常文档流，并不为元素预留&quot;</span>&gt;</span>元素会被移出正常文档流，并不为元素预留<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">.wrap&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    line-height: 1.5;</span><br><span class="line">    height: 1.5em;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.title&#123;</span><br><span class="line">    display: block;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    background-color: #fff;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    position: relative;</span><br><span class="line">    top: -3em;</span><br><span class="line">&#125;</span><br><span class="line">.txt&#123;</span><br><span class="line">  display: block;</span><br><span class="line">    max-height: 3em;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在此基础上，我们可以通过data-*属性和伪元素来设置title样式。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 隐藏title */</span></span><br><span class="line"><span class="selector-class">.title</span><span class="selector-attr">[title]</span> &#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 自定义title */</span></span><br><span class="line"><span class="selector-class">.title</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-title);</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>参考链接：<br><a href="https://github.com/iplaces/blog/issues/3">文本溢出与 Tooltip，如何更好的处理二者</a><br><a href="https://segmentfault.com/a/1190000040057525#item-1">CSS 文本超出提示效果</a><br><a href="https://segmentfault.com/q/1010000045092125">设置title样式</a></p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>tooltip</tag>
       </tags>
   </entry>
   <entry>
@@ -1413,6 +1384,31 @@ fadeOut(alpha) &#123;
       </categories>
       <tags>
         <tag>tailwind</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>🧐文本溢出+完整内容提示</title>
+    <url>/2024/09/25/text-ellipsis/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在开发中，经常会遇到超出省略并显示…的需求。有时，还需要做到在鼠标移入的时候显示具体内容。这些都很简单，但如果要实现“<strong>文本如果超出就在鼠标移入时显示具体内容，文本不超出鼠标移入就不显示</strong>”，就有一点点麻烦。而且，文本长度通常不固定，需要这种处理的文本有多个。所以，在此总结一下如何实现这个功能。</p>
+<h1 id="文本超出显示…"><a href="#文本超出显示…" class="headerlink" title="文本超出显示…"></a>文本超出显示…</h1><p>分为单行文本和多行文本2种情况，代码如下所示。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 单行文本</span><br><span class="line"><span class="selector-class">.text-single</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 多行文本</span><br><span class="line"><span class="selector-class">.text-multi</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  -webkit-<span class="selector-tag">line</span>-clamp: <span class="number">2</span>;</span><br><span class="line">  -webkit-<span class="attribute">box-orient</span>: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法一：根据scrollWidth和offsetWidth判断是否显示tooltip"><a href="#方法一：根据scrollWidth和offsetWidth判断是否显示tooltip" class="headerlink" title="方法一：根据scrollWidth和offsetWidth判断是否显示tooltip"></a>方法一：根据scrollWidth和offsetWidth判断是否显示tooltip</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in info&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-tooltip</span> <span class="attr">:visible</span>=<span class="string">&quot;nameVisible[item.key]&quot;</span> <span class="attr">:content</span>=<span class="string">&quot;item.content&quot;</span> <span class="attr">placement</span>=<span class="string">&quot;top&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> @<span class="attr">mouseenter</span>=<span class="string">&quot;(e: any) =&gt; handleMouseEnterName(e, item.key)&quot;</span> @<span class="attr">mouseleave</span>=<span class="string">&quot;handleMouseLeaveName(item.key)&quot;</span>&gt;</span></span><br><span class="line">        &#123;&#123; item.content &#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-tooltip</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">function handleMouseEnter(e: any, key: string) &#123;</span><br><span class="line">  if (e.target.scrollWidth &gt; e.target.clientWidth) &#123;</span><br><span class="line">    nameVisible.value[key] = true;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    nameVisible.value[key] = false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function handleMouseLeave(key: string) &#123;</span><br><span class="line">  nameVisible.value[key] = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法二：借助title属性"><a href="#方法二：借助title属性" class="headerlink" title="方法二：借助title属性"></a>方法二：借助title属性</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">title</span>=<span class="string">&quot;this is title&quot;</span>&gt;</span>show title when hover<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>仅设置title属性还达不到想要的效果，而且不能修改title的样式。<br>如果要实现想要的效果，具体思路如下：用2份相同的文本A和B，B设置title属性，并且上移N行，父元素设置超出不显示。单行省略时N是2，超出2行省略时N是4。<br>原因：假设单行省略，B上移2行后，如果文本只有一行，B移出了父元素范围不显示，鼠标移入A不显示title；如果文本有多行，B覆盖了A，鼠标移入显示title。</p>
+<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/73dea461a6644cefa6eb83e02723d14c~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5rKz6LGa6byT6byT:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiNjM4MTYxNDYwNDAzMjg3In0=&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1727360824&x-orig-sign=q3n2O7WUPkXjjIBDSx0zrSdXVXA=" alt="633840727-9c53a45a583a5b50_fix732.webp"></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;txt&quot;</span>&gt;</span>元素会被移出正常文档流，并不为元素预留<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span> <span class="attr">title</span>=<span class="string">&quot;元素会被移出正常文档流，并不为元素预留&quot;</span>&gt;</span>元素会被移出正常文档流，并不为元素预留<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">.wrap&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    line-height: 1.5;</span><br><span class="line">    height: 1.5em;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.title&#123;</span><br><span class="line">    display: block;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    background-color: #fff;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    position: relative;</span><br><span class="line">    top: -3em;</span><br><span class="line">&#125;</span><br><span class="line">.txt&#123;</span><br><span class="line">  display: block;</span><br><span class="line">    max-height: 3em;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在此基础上，我们可以通过data-*属性和伪元素来设置title样式。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 隐藏title */</span></span><br><span class="line"><span class="selector-class">.title</span><span class="selector-attr">[title]</span> &#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 自定义title */</span></span><br><span class="line"><span class="selector-class">.title</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-title);</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>参考链接：<br><a href="https://github.com/iplaces/blog/issues/3">文本溢出与 Tooltip，如何更好的处理二者</a><br><a href="https://segmentfault.com/a/1190000040057525#item-1">CSS 文本超出提示效果</a><br><a href="https://segmentfault.com/q/1010000045092125">设置title样式</a></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>tooltip</tag>
       </tags>
   </entry>
   <entry>
@@ -1877,7 +1873,6 @@ fadeOut(alpha) &#123;
 <p>参考链接：<a href="https://stackoverflow.com/questions/11598786/how-to-replace-non-printable-unicode-characters-javascript">stackoverflow中的解决办法</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Regular_expressions/Unicode_character_class_escape">unicode属性</a></p>
 ]]></content>
       <categories>
-        <category>HTML</category>
         <category>bug</category>
       </categories>
       <tags>
