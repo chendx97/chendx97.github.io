@@ -74,47 +74,6 @@
       </tags>
   </entry>
   <entry>
-    <title>npm error-could not determine executable to run</title>
-    <url>/2024/10/10/could-not-determine-executable-to-run/</url>
-    <content><![CDATA[<h1 id="遇见问题"><a href="#遇见问题" class="headerlink" title="遇见问题"></a>遇见问题</h1><p>在用我自己的脚手架创建项目时，遇到了一个报错，但别人同样的操作没有报错。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image.png" alt="报错信息"><br>然后打开.log文件，看到了更详细一点的报错信息。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(1).png" alt="报错2"></p>
-<h1 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h1><p>搜索<code>Error: could not determine executable to run</code>和<code>getBinFromManifest</code>发现，并没有明确的原因，很多人解决的方法<a href="https://stackoverflow.com/questions/67833794/npm-err-could-not-determine-executable-to-run">（解决方案集合）</a>都完全不一样。我一一都试了也不行。<br>然后再看报错信息的后面几行，发现了有什么地方不对劲，<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(2).png" alt="报错3"><br>我要使用的<code>create-pro</code>的版本根本不是0.0.0，而打开第14行的链接，这个npm包也不是我要用的那个。我的库是放在某个scope下的，这个链接指向的包与我的包同名，但不在scope内。<br>但是我要用的库已经全局安装过了，不明白为什么npm拉错了包。</p>
-<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># npm create pro // 原命令</span></span><br><span class="line">npm create @chen/pro // √</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遇到这个报错的时候，如果也是使用脚手架，可以看看包是否在scope内。不然，可以先看看命令有没有语法错误，然后试试重启vscode、重新安装依赖、赋予当前用户对node完全控制的权限等方法。</p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS变量和CSS函数</title>
-    <url>/2024/09/23/css-var-func/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CSS变量和CSS函数可以帮助开发者方便地实现功能。</p>
-<h1 id="CSS变量"><a href="#CSS变量" class="headerlink" title="CSS变量"></a>CSS变量</h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attr">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CSS变量名以–开头；<br>变量可以继承父元素的值；<br>var第2个参数为备用值，变量不生效时被使用；</p>
-<h1 id="CSS函数"><a href="#CSS函数" class="headerlink" title="CSS函数"></a>CSS函数</h1><p>常用的css函数包括：calc()、linear-gradient()、translate(), rotate(), scale()、rgba()、hsla()、attr()、clamp()、min()、max()。  </p>
-<h2 id="calc-执行计算"><a href="#calc-执行计算" class="headerlink" title="calc()执行计算"></a>calc()执行计算</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">30px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="linear-gradient-创建一个线性渐变"><a href="#linear-gradient-创建一个线性渐变" class="headerlink" title="linear-gradient()创建一个线性渐变"></a>linear-gradient()创建一个线性渐变</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, red, yellow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="transform函数改变元素的形状、位置和尺寸"><a href="#transform函数改变元素的形状、位置和尺寸" class="headerlink" title="transform函数改变元素的形状、位置和尺寸"></a>transform函数改变元素的形状、位置和尺寸</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.moved</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">50px</span>, <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="rgba-、hsla-定义颜色"><a href="#rgba-、hsla-定义颜色" class="headerlink" title="rgba()、hsla()定义颜色"></a>rgba()、hsla()定义颜色</h2><p>rgba(红，绿，蓝，透明度)<br>hsla(色调，饱和度，亮度，透明度)  </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">99</span>, <span class="number">71</span>, <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="attr-引用元素的属性值"><a href="#attr-引用元素的属性值" class="headerlink" title="attr()引用元素的属性值"></a>attr()引用元素的属性值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-tooltip);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="clamp-限制一个值在一个特定范围内"><a href="#clamp-限制一个值在一个特定范围内" class="headerlink" title="clamp()限制一个值在一个特定范围内"></a>clamp()限制一个值在一个特定范围内</h2><p>它接受三个参数：最小值、优选值和最大值。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">clamp</span>(<span class="number">2rem</span>, <span class="number">4vw</span> + <span class="number">1rem</span>, <span class="number">8rem</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个函数的工作方式是：如果优选值小于最小值，那么返回最小值；如果优选值大于最大值，那么返回最大值；如果优选值在最小值和最大值之间，那么返回优选值。<br>例如，font-size: clamp(12px, 5vw, 24px); 这个 CSS 规则会设置字体大小为视口宽度的 5%，但是不会小于 12px，也不会大于 24px。这在响应式设计中非常有用，可以确保元素的大小在不同的设备和屏幕尺寸上都能保持合适的比例，同时也不会过小或过大。   </p>
-<h2 id="min-、max-返回一组数值中最小或最大一个值"><a href="#min-、max-返回一组数值中最小或最大一个值" class="headerlink" title="min()、max()返回一组数值中最小或最大一个值"></a>min()、max()返回一组数值中最小或最大一个值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">min</span>(<span class="number">100%</span>, <span class="number">600px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>参数的类型：<br>&lt;length&gt;：长度值，如 px, em, rem, vw, vh 等。<br>&lt;number&gt;：数字值。<br>&lt;percentage&gt;：百分比。<br>&lt;calc()&gt;：另一个 calc() 函数的表达式。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【翻译】如何实现一个纯CSS计时器</title>
     <url>/2024/06/17/css-timer/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有时我们会在页面上使用计时器。通常我们会用js实现计时器功能，但某些时候更适合用css，比如某些邮件客户端不支持运行js。</p>
@@ -166,6 +125,84 @@
       </categories>
       <tags>
         <tag>timer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm error-could not determine executable to run</title>
+    <url>/2024/10/10/could-not-determine-executable-to-run/</url>
+    <content><![CDATA[<h1 id="遇见问题"><a href="#遇见问题" class="headerlink" title="遇见问题"></a>遇见问题</h1><p>在用我自己的脚手架创建项目时，遇到了一个报错，但别人同样的操作没有报错。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image.png" alt="报错信息"><br>然后打开.log文件，看到了更详细一点的报错信息。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(1).png" alt="报错2"></p>
+<h1 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h1><p>搜索<code>Error: could not determine executable to run</code>和<code>getBinFromManifest</code>发现，并没有明确的原因，很多人解决的方法<a href="https://stackoverflow.com/questions/67833794/npm-err-could-not-determine-executable-to-run">（解决方案集合）</a>都完全不一样。我一一都试了也不行。<br>然后再看报错信息的后面几行，发现了有什么地方不对劲，<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(2).png" alt="报错3"><br>我要使用的<code>create-pro</code>的版本根本不是0.0.0，而打开第14行的链接，这个npm包也不是我要用的那个。我的库是放在某个scope下的，这个链接指向的包与我的包同名，但不在scope内。<br>但是我要用的库已经全局安装过了，不明白为什么npm拉错了包。</p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># npm create pro // 原命令</span></span><br><span class="line">npm create @chen/pro // √</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遇到这个报错的时候，如果也是使用脚手架，可以看看包是否在scope内。不然，可以先看看命令有没有语法错误，然后试试重启vscode、重新安装依赖、赋予当前用户对node完全控制的权限等方法。</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS变量和CSS函数</title>
+    <url>/2024/09/23/css-var-func/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CSS变量和CSS函数可以帮助开发者方便地实现功能。</p>
+<h1 id="CSS变量"><a href="#CSS变量" class="headerlink" title="CSS变量"></a>CSS变量</h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attr">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CSS变量名以–开头；<br>变量可以继承父元素的值；<br>var第2个参数为备用值，变量不生效时被使用；</p>
+<h1 id="CSS函数"><a href="#CSS函数" class="headerlink" title="CSS函数"></a>CSS函数</h1><p>常用的css函数包括：calc()、linear-gradient()、translate(), rotate(), scale()、rgba()、hsla()、attr()、clamp()、min()、max()。  </p>
+<h2 id="calc-执行计算"><a href="#calc-执行计算" class="headerlink" title="calc()执行计算"></a>calc()执行计算</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">30px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="linear-gradient-创建一个线性渐变"><a href="#linear-gradient-创建一个线性渐变" class="headerlink" title="linear-gradient()创建一个线性渐变"></a>linear-gradient()创建一个线性渐变</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.background</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, red, yellow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="transform函数改变元素的形状、位置和尺寸"><a href="#transform函数改变元素的形状、位置和尺寸" class="headerlink" title="transform函数改变元素的形状、位置和尺寸"></a>transform函数改变元素的形状、位置和尺寸</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.moved</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">50px</span>, <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="rgba-、hsla-定义颜色"><a href="#rgba-、hsla-定义颜色" class="headerlink" title="rgba()、hsla()定义颜色"></a>rgba()、hsla()定义颜色</h2><p>rgba(红，绿，蓝，透明度)<br>hsla(色调，饱和度，亮度，透明度)  </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">99</span>, <span class="number">71</span>, <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="attr-引用元素的属性值"><a href="#attr-引用元素的属性值" class="headerlink" title="attr()引用元素的属性值"></a>attr()引用元素的属性值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-tooltip);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="clamp-限制一个值在一个特定范围内"><a href="#clamp-限制一个值在一个特定范围内" class="headerlink" title="clamp()限制一个值在一个特定范围内"></a>clamp()限制一个值在一个特定范围内</h2><p>它接受三个参数：最小值、优选值和最大值。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">clamp</span>(<span class="number">2rem</span>, <span class="number">4vw</span> + <span class="number">1rem</span>, <span class="number">8rem</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数的工作方式是：如果优选值小于最小值，那么返回最小值；如果优选值大于最大值，那么返回最大值；如果优选值在最小值和最大值之间，那么返回优选值。<br>例如，font-size: clamp(12px, 5vw, 24px); 这个 CSS 规则会设置字体大小为视口宽度的 5%，但是不会小于 12px，也不会大于 24px。这在响应式设计中非常有用，可以确保元素的大小在不同的设备和屏幕尺寸上都能保持合适的比例，同时也不会过小或过大。   </p>
+<h2 id="min-、max-返回一组数值中最小或最大一个值"><a href="#min-、max-返回一组数值中最小或最大一个值" class="headerlink" title="min()、max()返回一组数值中最小或最大一个值"></a>min()、max()返回一组数值中最小或最大一个值</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">min</span>(<span class="number">100%</span>, <span class="number">600px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参数的类型：<br>&lt;length&gt;：长度值，如 px, em, rem, vw, vh 等。<br>&lt;number&gt;：数字值。<br>&lt;percentage&gt;：百分比。<br>&lt;calc()&gt;：另一个 calc() 函数的表达式。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>💐Docker基础知识总结</title>
+    <url>/2024/09/02/docker-tutorial/</url>
+    <content><![CDATA[<h1 id="1-docker的作用"><a href="#1-docker的作用" class="headerlink" title="1.docker的作用"></a>1.docker的作用</h1><p>打包、分发、部署<br>打包：就是把你软件运行所需的依赖、第三方库、软件打包到一起，变成一个安装包；<br>分发：你可以把你打包好的“安装包”上传到一个镜像仓库，其他人可以非常方便的获取和安装；<br>部署：拿着“安装包”就可以一个命令运行起来你的应用，自动模拟出一模一样的运行环境，不管是在 Windows&#x2F;Mac&#x2F;Linux。   </p>
+<h1 id="2-docker命令"><a href="#2-docker命令" class="headerlink" title="2.docker命令"></a>2.docker命令</h1><figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker build -t test:v1 .     </span><br></pre></td></tr></table></figure>
+<p>-t 指定镜像名字和版本号；<br>. 指在当前目录build，将当前目录作为构建上下文；<br>参考链接：<a href="https://docs.docker.com/engine/reference/commandline/build/">docker build命令</a></p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -dt -p 8089:8089 demo</span></span><br></pre></td></tr></table></figure>
+<p>-p port1:port2 指定端口号，port1要访问的端口号，port2docker内部使用的端口号；<br>-d 后台运行，-i 以交互模式运行容器，-t为容器重新分配一个伪输入终端，-it在一个新终端里运行容器，-dt在终端的后台运行容器；<br>参考链接：<a href="https://docs.docker.com/engine/reference/commandline/run/">docker run命令</a>  </p>
+<p>其他常见命令如下所示：<br>docker ps 查看当前运行中的容器<br>docker exec -it  containerid sh  &#x2F;&#x2F; 进入容器，在容器内可以执行npm run start等命令<br>docker images 查看镜像列表<br>docker rm container-id 删除指定 id 的容器<br>docker stop&#x2F;start container-id 停止&#x2F;启动指定 id 的容器<br>docker rmi image-id 删除指定 id 的镜像</p>
+<h1 id="3-Dockerfile文件"><a href="#3-Dockerfile文件" class="headerlink" title="3.Dockerfile文件"></a>3.Dockerfile文件</h1><p>文件中命令解释如下所示：  </p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine <span class="comment"># 指定基础镜像</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app <span class="comment"># 指定shell语句运行的目录，如果目录不存在会自动创建</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> a.txt /app/ <span class="comment"># 将本地文件拷贝到容器的某目录下</span></span></span><br><span class="line"><span class="comment"># ADD a.txt /app/ # 拷贝本地或远程文件,可以自动解压缩，还会使构建缓存失效</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm i <span class="comment"># 运行shell语句，构建时运行</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash">  [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]  <span class="comment"># 指定镜像启动运行的脚本</span></span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>] <span class="comment"># 类似CMD  </span></span></span><br><span class="line"><span class="keyword">MAINTAINER</span> &lt;name&gt;  <span class="comment"># 指定生成镜像的作者，LABEL更灵活。  </span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8089</span> <span class="comment"># 暴露镜像在容器内运行的端口号  </span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">8089</span> <span class="comment"># 指定环境变量，运行时也生效  </span></span><br><span class="line"><span class="keyword">ARG</span>   <span class="comment"># 构建参数，运行时无效，可以构建时候临时修改变量</span></span><br></pre></td></tr></table></figure>
+<p>教程1：<a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP</a><br>教程2：<a href="https://www.bilibili.com/video/BV1k7411B7QL/?spm_id_from=333.337.search-card.all.click&vd_source=6452cc89d77d512e999c37668481d36b">https://www.bilibili.com/video/BV1k7411B7QL/?spm_id_from=333.337.search-card.all.click&amp;vd_source=6452cc89d77d512e999c37668481d36b</a><br>教程3：<a href="https://yeasy.gitbook.io/docker_practice/appendix/best_practices#dockerfile-zhi-ling">https://yeasy.gitbook.io/docker_practice/appendix/best_practices#dockerfile-zhi-ling</a>  </p>
+<h1 id="4-dockerfile配置方案"><a href="#4-dockerfile配置方案" class="headerlink" title="4.dockerfile配置方案"></a>4.dockerfile配置方案</h1><p>方案1：<br>本地打包，然后复制到容器中。</p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># node 启动</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json /app/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./.output /app/.output</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8089</span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">8089</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> /dist /usr/share/nginx/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/conf.d/nginx.conf</span></span><br></pre></td></tr></table></figure>
+<p>方案2：把本地整个文件夹复制到容器中，在容器中打包。需要添加.dockerignore文件，避免上传的文件夹比较大。</p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># node</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">cd</span> /app &amp;&amp; yarn &amp;&amp; yarn build</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">cd</span> /app &amp;&amp; yarn &amp;&amp; yarn build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> /app/dist /usr/share/nginx/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/conf.d/nginx.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>方案1需要在docker build前执行一遍yarn build，<br>方案2打包出来的镜像比较大。</p>
+<h1 id="5-报错解决"><a href="#5-报错解决" class="headerlink" title="5.报错解决"></a>5.报错解决</h1><p>This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2<br>docker版本和本地电脑中node版本不匹配，升级docker中的node，或使用yarn。</p>
+<h1 id="6-调试docker-build"><a href="#6-调试docker-build" class="headerlink" title="6.调试docker build"></a>6.调试docker build</h1><p>在dockerfile中只设置基础镜像，然后启动，在终端中运行需要的步骤，如果成功就把每个步骤的命令写入dockerfile文件中。</p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;tail&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;/dev/null&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<p>进入调试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker build -t demo .</span><br><span class="line">docker run -dt -p 8089:8089 demo</span><br><span class="line">docker <span class="built_in">exec</span> -it  containerid sh</span><br></pre></td></tr></table></figure>
+<p>然后可以在终端中执行Dockerfile中想要添加的RUN命令。  </p>
+<p>调试后关闭容器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker stop <span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>指南</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -226,43 +263,6 @@
       <tags>
         <tag>vue</tag>
         <tag>cli</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>💐Docker基础知识总结</title>
-    <url>/2024/09/02/docker-tutorial/</url>
-    <content><![CDATA[<h1 id="1-docker的作用"><a href="#1-docker的作用" class="headerlink" title="1.docker的作用"></a>1.docker的作用</h1><p>打包、分发、部署<br>打包：就是把你软件运行所需的依赖、第三方库、软件打包到一起，变成一个安装包；<br>分发：你可以把你打包好的“安装包”上传到一个镜像仓库，其他人可以非常方便的获取和安装；<br>部署：拿着“安装包”就可以一个命令运行起来你的应用，自动模拟出一模一样的运行环境，不管是在 Windows&#x2F;Mac&#x2F;Linux。   </p>
-<h1 id="2-docker命令"><a href="#2-docker命令" class="headerlink" title="2.docker命令"></a>2.docker命令</h1><figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker build -t test:v1 .     </span><br></pre></td></tr></table></figure>
-<p>-t 指定镜像名字和版本号；<br>. 指在当前目录build，将当前目录作为构建上下文；<br>参考链接：<a href="https://docs.docker.com/engine/reference/commandline/build/">docker build命令</a></p>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -dt -p 8089:8089 demo</span></span><br></pre></td></tr></table></figure>
-<p>-p port1:port2 指定端口号，port1要访问的端口号，port2docker内部使用的端口号；<br>-d 后台运行，-i 以交互模式运行容器，-t为容器重新分配一个伪输入终端，-it在一个新终端里运行容器，-dt在终端的后台运行容器；<br>参考链接：<a href="https://docs.docker.com/engine/reference/commandline/run/">docker run命令</a>  </p>
-<p>其他常见命令如下所示：<br>docker ps 查看当前运行中的容器<br>docker exec -it  containerid sh  &#x2F;&#x2F; 进入容器，在容器内可以执行npm run start等命令<br>docker images 查看镜像列表<br>docker rm container-id 删除指定 id 的容器<br>docker stop&#x2F;start container-id 停止&#x2F;启动指定 id 的容器<br>docker rmi image-id 删除指定 id 的镜像</p>
-<h1 id="3-Dockerfile文件"><a href="#3-Dockerfile文件" class="headerlink" title="3.Dockerfile文件"></a>3.Dockerfile文件</h1><p>文件中命令解释如下所示：  </p>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine <span class="comment"># 指定基础镜像</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app <span class="comment"># 指定shell语句运行的目录，如果目录不存在会自动创建</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> a.txt /app/ <span class="comment"># 将本地文件拷贝到容器的某目录下</span></span></span><br><span class="line"><span class="comment"># ADD a.txt /app/ # 拷贝本地或远程文件,可以自动解压缩，还会使构建缓存失效</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm i <span class="comment"># 运行shell语句，构建时运行</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash">  [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]  <span class="comment"># 指定镜像启动运行的脚本</span></span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>] <span class="comment"># 类似CMD  </span></span></span><br><span class="line"><span class="keyword">MAINTAINER</span> &lt;name&gt;  <span class="comment"># 指定生成镜像的作者，LABEL更灵活。  </span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8089</span> <span class="comment"># 暴露镜像在容器内运行的端口号  </span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">8089</span> <span class="comment"># 指定环境变量，运行时也生效  </span></span><br><span class="line"><span class="keyword">ARG</span>   <span class="comment"># 构建参数，运行时无效，可以构建时候临时修改变量</span></span><br></pre></td></tr></table></figure>
-<p>教程1：<a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP</a><br>教程2：<a href="https://www.bilibili.com/video/BV1k7411B7QL/?spm_id_from=333.337.search-card.all.click&vd_source=6452cc89d77d512e999c37668481d36b">https://www.bilibili.com/video/BV1k7411B7QL/?spm_id_from=333.337.search-card.all.click&amp;vd_source=6452cc89d77d512e999c37668481d36b</a><br>教程3：<a href="https://yeasy.gitbook.io/docker_practice/appendix/best_practices#dockerfile-zhi-ling">https://yeasy.gitbook.io/docker_practice/appendix/best_practices#dockerfile-zhi-ling</a>  </p>
-<h1 id="4-dockerfile配置方案"><a href="#4-dockerfile配置方案" class="headerlink" title="4.dockerfile配置方案"></a>4.dockerfile配置方案</h1><p>方案1：<br>本地打包，然后复制到容器中。</p>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># node 启动</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json /app/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./.output /app/.output</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8089</span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">8089</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> /dist /usr/share/nginx/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/conf.d/nginx.conf</span></span><br></pre></td></tr></table></figure>
-<p>方案2：把本地整个文件夹复制到容器中，在容器中打包。需要添加.dockerignore文件，避免上传的文件夹比较大。</p>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># node</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">cd</span> /app &amp;&amp; yarn &amp;&amp; yarn build</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">cd</span> /app &amp;&amp; yarn &amp;&amp; yarn build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> /app/dist /usr/share/nginx/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/conf.d/nginx.conf</span></span><br></pre></td></tr></table></figure>
-
-<p>方案1需要在docker build前执行一遍yarn build，<br>方案2打包出来的镜像比较大。</p>
-<h1 id="5-报错解决"><a href="#5-报错解决" class="headerlink" title="5.报错解决"></a>5.报错解决</h1><p>This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2<br>docker版本和本地电脑中node版本不匹配，升级docker中的node，或使用yarn。</p>
-<h1 id="6-调试docker-build"><a href="#6-调试docker-build" class="headerlink" title="6.调试docker build"></a>6.调试docker build</h1><p>在dockerfile中只设置基础镜像，然后启动，在终端中运行需要的步骤，如果成功就把每个步骤的命令写入dockerfile文件中。</p>
-<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;tail&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;/dev/null&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-<p>进入调试：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker build -t demo .</span><br><span class="line">docker run -dt -p 8089:8089 demo</span><br><span class="line">docker <span class="built_in">exec</span> -it  containerid sh</span><br></pre></td></tr></table></figure>
-<p>然后可以在终端中执行Dockerfile中想要添加的RUN命令。  </p>
-<p>调试后关闭容器：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker stop <span class="built_in">id</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>指南</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -339,6 +339,25 @@
       </tags>
   </entry>
   <entry>
+    <title>git LFS解决大文件上传</title>
+    <url>/2024/02/04/git-lfs/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>git 限制上传文件大小在 100M 以内。在日常工作中，偶尔会遇到某次提交的文件总量过大或者某个文件过大，所以在此记录一下如何解决这个问题。</p>
+<h1 id="分批次提交"><a href="#分批次提交" class="headerlink" title="分批次提交"></a>分批次提交</h1><p>如果是提交很多文件，但单文件都不大的时候，可以选择分批次提交。如果已经 commit 才发现文件总量过大，则需要撤销 commit 。以下是会用到的 git 命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog 查看所有操作的历史记录</span><br><span class="line">git reset HEAD^2 上上一个版本</span><br><span class="line">git reset @~ 撤销一次commit</span><br></pre></td></tr></table></figure>
+<p>如果仅撤销上一次，则直接用第3条命令。<br>如果在尝试解决问题时进行了多次 commit，则可以通过第1条命令查询想要回退到的版本，然后通过第2条命令回退。</p>
+<h1 id="LFS"><a href="#LFS" class="headerlink" title="LFS"></a>LFS</h1><p>首先，下载<a href="https://git-lfs.com/">git LFS</a>。<br>然后，关联需要用 LFS 上传的文件，比如下面的命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git lfs track <span class="string">&#x27;xx.mp4&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>最后，按照正常的提交流程进行提交。</p>
+<p>以下是可能用到的命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关联某类型文件</span></span><br><span class="line">git lfs track <span class="string">&#x27;*.mp4&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找大于 nM 的文件</span></span><br><span class="line">find ./ -size +100M</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>element-plus自动按需引入</title>
     <url>/2023/09/13/element-plus-use/</url>
     <content><![CDATA[<p>前言：使用<code>unplugin-vue-components</code>后，可以实现按需引入，而且也不用再使用<code>import</code>引入需要的组件，直接使用<code>&lt;el-button&gt;</code>等组件就可以。</p>
@@ -364,22 +383,32 @@
       </tags>
   </entry>
   <entry>
-    <title>git LFS解决大文件上传</title>
-    <url>/2024/02/04/git-lfs/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>git 限制上传文件大小在 100M 以内。在日常工作中，偶尔会遇到某次提交的文件总量过大或者某个文件过大，所以在此记录一下如何解决这个问题。</p>
-<h1 id="分批次提交"><a href="#分批次提交" class="headerlink" title="分批次提交"></a>分批次提交</h1><p>如果是提交很多文件，但单文件都不大的时候，可以选择分批次提交。如果已经 commit 才发现文件总量过大，则需要撤销 commit 。以下是会用到的 git 命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog 查看所有操作的历史记录</span><br><span class="line">git reset HEAD^2 上上一个版本</span><br><span class="line">git reset @~ 撤销一次commit</span><br></pre></td></tr></table></figure>
-<p>如果仅撤销上一次，则直接用第3条命令。<br>如果在尝试解决问题时进行了多次 commit，则可以通过第1条命令查询想要回退到的版本，然后通过第2条命令回退。</p>
-<h1 id="LFS"><a href="#LFS" class="headerlink" title="LFS"></a>LFS</h1><p>首先，下载<a href="https://git-lfs.com/">git LFS</a>。<br>然后，关联需要用 LFS 上传的文件，比如下面的命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git lfs track <span class="string">&#x27;xx.mp4&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>最后，按照正常的提交流程进行提交。</p>
-<p>以下是可能用到的命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关联某类型文件</span></span><br><span class="line">git lfs track <span class="string">&#x27;*.mp4&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找大于 nM 的文件</span></span><br><span class="line">find ./ -size +100M</span><br></pre></td></tr></table></figure>]]></content>
+    <title>🔑输入密码时判断是否开启大写锁定</title>
+    <url>/2024/07/23/is-caps-lock/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>任何人在任何时候都有可能悄无声息的把大写锁定打开。在大部分输入时，用户可以轻易地发现输入的是大写。但，在输入密码时，用户就不容易发现了。为了更好的用户体验，我们可以在用户输入密码时提示大写锁定已开启。你也一定见过这种场景吧。</p>
+<h1 id="提示用户大写锁定已开启"><a href="#提示用户大写锁定已开启" class="headerlink" title="提示用户大写锁定已开启"></a>提示用户大写锁定已开启</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> inputElement = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#your-input-element&#x27;</span>);</span><br><span class="line"></span><br><span class="line">inputElement.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;CapsLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;大写锁定是打开的&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;大写锁定是关闭的&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码是在监听用户在输入框输入时判断的，当然也可以在按下任何键的时候判断。</p>
+<h1 id="getModifierState"><a href="#getModifierState" class="headerlink" title="getModifierState"></a>getModifierState</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">getModifierState</span>(key)</span><br></pre></td></tr></table></figure>
+
+<p>KeyboardEvent.getModifierState() 方法返回指定修饰键的当前状态：如果修饰键处于活动状态（即修饰键被按下或锁定），则返回 true ，否则返回 false。</p>
+<p>参数key还可以是Alt、NumLock等。对修饰符及不同平台的支持可见此<a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#modifier_keys_on_firefox">链接</a>。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="检测快捷键组合"><a href="#检测快捷键组合" class="headerlink" title="检测快捷键组合"></a>检测快捷键组合</h3><p>检查多个修饰键是否同时被按下。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Control&#x27;</span>) &amp;&amp; event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Alt&#x27;</span>) &amp;&amp; event.<span class="property">key</span> === <span class="string">&#x27;S&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 执行Ctrl+Alt+S的快捷操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="优化输入体验"><a href="#优化输入体验" class="headerlink" title="优化输入体验"></a>优化输入体验</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;input&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;NumLock&#x27;</span>) &amp;&amp; event.<span class="property">target</span>.<span class="property">type</span> === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 提示用户NumLock可能影响输入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="创建自定义键盘快捷操作"><a href="#创建自定义键盘快捷操作" class="headerlink" title="创建自定义键盘快捷操作"></a>创建自定义键盘快捷操作</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Shift&#x27;</span>) &amp;&amp; event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Alt&#x27;</span>) &amp;&amp; event.<span class="property">key</span> === <span class="string">&#x27;Z&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 执行自定义操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="仅能使用getModifierState的场景"><a href="#仅能使用getModifierState的场景" class="headerlink" title="仅能使用getModifierState的场景"></a>仅能使用getModifierState的场景</h2><h3 id="检测大写锁定"><a href="#检测大写锁定" class="headerlink" title="检测大写锁定"></a>检测大写锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;CapsLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Caps Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="检测数字锁定"><a href="#检测数字锁定" class="headerlink" title="检测数字锁定"></a>检测数字锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;NumLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Num Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>某些情况下，可能误触数字锁定键，或者初始某些键盘初始就是数字锁定的。当你输入u，显示4；当你输入k，显示的是2。这时候就需要按一下F11解除数字锁定。</p>
+<h3 id="检测滚动锁定"><a href="#检测滚动锁定" class="headerlink" title="检测滚动锁定"></a>检测滚动锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;ScrollLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Scroll Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="检测其他特殊修饰键"><a href="#检测其他特殊修饰键" class="headerlink" title="检测其他特殊修饰键"></a>检测其他特殊修饰键</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;AltGraph&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;AltGraph is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;OS&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;OS key (Windows key or Command key) is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState">MDN: getModifierState</a><br><a href="https://davidwalsh.name/detect-caps-lock">David Walsh: detect-caps-lock</a></p>
+]]></content>
       <categories>
-        <category>问题</category>
+        <category>js</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>codeKey</tag>
       </tags>
   </entry>
   <entry>
@@ -726,6 +755,50 @@ fadeOut(alpha) &#123;
       </tags>
   </entry>
   <entry>
+    <title>从0到1实现一个npm库</title>
+    <url>/2023/10/11/npm-lib/</url>
+    <content><![CDATA[<h1 id="项目的目录结构"><a href="#项目的目录结构" class="headerlink" title="项目的目录结构"></a>项目的目录结构</h1><p>首先创建一个空项目，</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vue@lastest</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+<p>然后把<code>components</code>从<code>src</code>中挪到根目录下，把<code>src</code>改名为<code>examples</code>，修改<code>index.html</code>中<code>main.ts</code>的路径。<br>具体的项目结构如下所示：</p>
+<ul>
+<li>components</li>
+<li>examples</li>
+<li>node_modules</li>
+<li>public</li>
+<li>index.html</li>
+<li>package.json</li>
+<li>vite.config.ts</li>
+</ul>
+<h1 id="导出组件"><a href="#导出组件" class="headerlink" title="导出组件"></a>导出组件</h1><p>在<code>components/index.ts</code>中定义导出的组件。<br>以下代码是导出单个组件，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">App</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&#x27;./Button&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyButtonPlugin</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">app: App</span>) =&gt;</span> &#123;</span><br><span class="line">    app.<span class="title function_">component</span>(<span class="string">&#x27;MyButton&#x27;</span>, <span class="title class_">MyButton</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyButtonPlugin</span>;</span><br></pre></td></tr></table></figure>
+<p>如果有多个组件需要导出，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/Button/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">App</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&#x27;./Button&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyButtonPlugin</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">app: App</span>) =&gt;</span> &#123;</span><br><span class="line">    app.<span class="title function_">component</span>(<span class="string">&#x27;MyButton&#x27;</span>, <span class="title class_">MyButton</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyButtonPlugin</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/index.ts</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&quot;./Button&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyTable</span> <span class="keyword">from</span> <span class="string">&quot;./Table&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">components</span>: any = &#123;</span><br><span class="line">  <span class="title class_">MyButton</span>,</span><br><span class="line">  <span class="title class_">MyTable</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyUI</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">Vue: App</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(components).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title class_">Vue</span>.<span class="title function_">use</span>(components[key]);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出多个组件，方便按需引入</span></span><br><span class="line"><span class="keyword">export</span> &#123; <span class="title class_">MyButton</span>, <span class="title class_">MyTable</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyUI</span>;</span><br></pre></td></tr></table></figure>
+<p><em><code>app.use</code>用来安装插件，插件可以是具有<code>install</code>方法的对象，也可以是当作<code>install</code>方法的函数。</em></p>
+<h1 id="引入组件"><a href="#引入组件" class="headerlink" title="引入组件"></a>引入组件</h1><p>在<code>examples/main.ts</code>中使用<code>app.use</code>来安装插件，然后就可以全局使用了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 整个引入</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyUI</span> <span class="keyword">from</span> <span class="string">&#x27;../components&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">MyUI</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按需引入</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MyButton</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;../components&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">MyButton</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// App.vue</span></span><br><span class="line">&lt;my-button /&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="打包组件库"><a href="#打包组件库" class="headerlink" title="打包组件库"></a>打包组件库</h1><p>首先修改<code>package.json</code>文件，去掉<code>private</code>字段，添加<code>main</code>字段，<code>files</code>字段，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;dist/index.umd.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;files&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;dist&quot;</span>,</span><br><span class="line">    <span class="string">&quot;components&quot;</span></span><br><span class="line">  ],</span><br></pre></td></tr></table></figure>
+<p>然后修改<code>vite.config.ts</code>配置，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">build</span>: &#123;</span><br><span class="line">    <span class="attr">lib</span>: &#123;</span><br><span class="line">      <span class="attr">entry</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;components&quot;</span>),</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&quot;MyUI&quot;</span>,</span><br><span class="line">      <span class="attr">fileName</span>: <span class="function">(<span class="params">format, fileName</span>) =&gt;</span> <span class="string">`<span class="subst">$&#123;fileName&#125;</span>.<span class="subst">$&#123;format&#125;</span>.js`</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rollupOptions</span>: &#123;</span><br><span class="line">      <span class="attr">external</span>: [<span class="string">&#x27;vue&#x27;</span>],</span><br><span class="line">      <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">globals</span>: &#123;</span><br><span class="line">          <span class="attr">vue</span>: <span class="string">&#x27;Vue&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>测试打包后的文件:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&#x27;../dist/index.es.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;../dist/style.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(test);</span><br></pre></td></tr></table></figure>
+<h1 id="发布库"><a href="#发布库" class="headerlink" title="发布库"></a>发布库</h1><p>如果没有<code>npm</code>账号需要先注册一下。<br>如果<code>npm</code>源不是默认源，需要修改为默认源。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm login</span><br><span class="line">npm publish</span><br></pre></td></tr></table></figure>
+<p>注：每次<code>push</code>的时候都要修改<code>package.json</code>中的<code>version</code>。</p>
+]]></content>
+      <categories>
+        <category>指南</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx实现目录浏览功能及权限校验</title>
     <url>/2024/06/26/nginx-autoindex-auth/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>需要实现的功能是，打开 <a href="http://a.b.c.d/">http://a.b.c.d</a> 可以访问服务器上的某个目录。而且，在第一次登录及登录过期时会进行登录，登录成功后才可以访问到目录。</p>
@@ -800,32 +873,26 @@ fadeOut(alpha) &#123;
       </tags>
   </entry>
   <entry>
-    <title>🔑输入密码时判断是否开启大写锁定</title>
-    <url>/2024/07/23/is-caps-lock/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>任何人在任何时候都有可能悄无声息的把大写锁定打开。在大部分输入时，用户可以轻易地发现输入的是大写。但，在输入密码时，用户就不容易发现了。为了更好的用户体验，我们可以在用户输入密码时提示大写锁定已开启。你也一定见过这种场景吧。</p>
-<h1 id="提示用户大写锁定已开启"><a href="#提示用户大写锁定已开启" class="headerlink" title="提示用户大写锁定已开启"></a>提示用户大写锁定已开启</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> inputElement = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#your-input-element&#x27;</span>);</span><br><span class="line"></span><br><span class="line">inputElement.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;CapsLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;大写锁定是打开的&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;大写锁定是关闭的&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码是在监听用户在输入框输入时判断的，当然也可以在按下任何键的时候判断。</p>
-<h1 id="getModifierState"><a href="#getModifierState" class="headerlink" title="getModifierState"></a>getModifierState</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">getModifierState</span>(key)</span><br></pre></td></tr></table></figure>
-
-<p>KeyboardEvent.getModifierState() 方法返回指定修饰键的当前状态：如果修饰键处于活动状态（即修饰键被按下或锁定），则返回 true ，否则返回 false。</p>
-<p>参数key还可以是Alt、NumLock等。对修饰符及不同平台的支持可见此<a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#modifier_keys_on_firefox">链接</a>。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="检测快捷键组合"><a href="#检测快捷键组合" class="headerlink" title="检测快捷键组合"></a>检测快捷键组合</h3><p>检查多个修饰键是否同时被按下。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Control&#x27;</span>) &amp;&amp; event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Alt&#x27;</span>) &amp;&amp; event.<span class="property">key</span> === <span class="string">&#x27;S&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 执行Ctrl+Alt+S的快捷操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="优化输入体验"><a href="#优化输入体验" class="headerlink" title="优化输入体验"></a>优化输入体验</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;input&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;NumLock&#x27;</span>) &amp;&amp; event.<span class="property">target</span>.<span class="property">type</span> === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 提示用户NumLock可能影响输入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="创建自定义键盘快捷操作"><a href="#创建自定义键盘快捷操作" class="headerlink" title="创建自定义键盘快捷操作"></a>创建自定义键盘快捷操作</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Shift&#x27;</span>) &amp;&amp; event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;Alt&#x27;</span>) &amp;&amp; event.<span class="property">key</span> === <span class="string">&#x27;Z&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 执行自定义操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="仅能使用getModifierState的场景"><a href="#仅能使用getModifierState的场景" class="headerlink" title="仅能使用getModifierState的场景"></a>仅能使用getModifierState的场景</h2><h3 id="检测大写锁定"><a href="#检测大写锁定" class="headerlink" title="检测大写锁定"></a>检测大写锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;CapsLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Caps Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="检测数字锁定"><a href="#检测数字锁定" class="headerlink" title="检测数字锁定"></a>检测数字锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;NumLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Num Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>某些情况下，可能误触数字锁定键，或者初始某些键盘初始就是数字锁定的。当你输入u，显示4；当你输入k，显示的是2。这时候就需要按一下F11解除数字锁定。</p>
-<h3 id="检测滚动锁定"><a href="#检测滚动锁定" class="headerlink" title="检测滚动锁定"></a>检测滚动锁定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;ScrollLock&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Scroll Lock is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="检测其他特殊修饰键"><a href="#检测其他特殊修饰键" class="headerlink" title="检测其他特殊修饰键"></a>检测其他特殊修饰键</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;AltGraph&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;AltGraph is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="title function_">getModifierState</span>(<span class="string">&#x27;OS&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;OS key (Windows key or Command key) is active&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState">MDN: getModifierState</a><br><a href="https://davidwalsh.name/detect-caps-lock">David Walsh: detect-caps-lock</a></p>
+    <title>为什么只这一个接口502呢？</title>
+    <url>/2024/01/20/post-502/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前几天遇到了一个没见过的bug，在此记录一下。前几天，新写了一个页面，里面有get请求、json参数的post请求、form参数的post请求，然后把这个项目打包出来的dist放入node中。更新到线上以后，发现仅有json参数的post请求出现nginx 502报错，其他接口都正常。</p>
+<h1 id="解决问题的思路"><a href="#解决问题的思路" class="headerlink" title="解决问题的思路"></a>解决问题的思路</h1><p>刚开始搜索了一下<strong>nginx 502</strong>，没发现什么有用信息。  </p>
+<p>首先是发现其他get接口都正常，点击按钮时这个post接口报错，当时就有点懵。然后检查了同一个项目另一个post接口，发现另一个post接口也正常。所以，推理得<strong>json类型参数的post请求</strong>有问题。  </p>
+<p>本地环境，这个json参数的请求没问题，测试环境是用dist+nginx部署的，这个请求也没问题。线上环境是<strong>dist+node</strong>部署，所以就定位到了http-proxy-middleware这个库。</p>
+<p>在node+dist项目中，如果接口就是这个node的就不用代理了，但如果前端代码中请求了别的项目的接口，就需要用http-proxy-middleware添加代理配置。</p>
+<p>搜索<strong>http-proxy-middleware json请求502</strong>，就发现了解决方案。</p>
+<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h1><p>在node项目中，会使用bodyParser这个库来解析post请求的参数，这个库会改写所有post请求的body，所以前端代码请求其他项目的post请求的body也会被修改。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>在代理别的项目的接口时修改body。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/myapi&#x27;</span>, <span class="title function_">createProxyMiddleware</span>(&#123;</span><br><span class="line">  <span class="attr">target</span>: <span class="string">&#x27;http://x.x.x.x:x&#x27;</span>,</span><br><span class="line">  <span class="attr">pathRewrite</span>: <span class="function">(<span class="params">path</span>) =&gt;</span> path.<span class="title function_">replace</span>(<span class="string">&quot;/myapi/&quot;</span>, <span class="string">&quot;/&quot;</span>),</span><br><span class="line">  <span class="attr">on</span>: &#123;</span><br><span class="line">    <span class="attr">proxyReq</span>: <span class="function">(<span class="params">proxyReq, req: Request, res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!req.<span class="property">body</span> || !<span class="title class_">Object</span>.<span class="title function_">keys</span>(req.<span class="property">body</span>).<span class="property">length</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> contentType = proxyReq.<span class="title function_">getHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> <span class="title function_">writeBody</span> = (<span class="params">bodyData: string</span>) =&gt; &#123;</span><br><span class="line">          proxyReq.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Length&#x27;</span>, <span class="title class_">Buffer</span>.<span class="title function_">byteLength</span>(bodyData));</span><br><span class="line">          proxyReq.<span class="title function_">write</span>(bodyData);</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (contentType === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">writeBody</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(req.<span class="property">body</span>));</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (contentType === <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">writeBody</span>(querystring.<span class="title function_">stringify</span>(req.<span class="property">body</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<p>在这个issue<a href="https://github.com/chimurai/http-proxy-middleware/issues/320">参考issue</a>中发现了解决办法，然后又在<a href="https://github.com/chimurai/http-proxy-middleware?tab=readme-ov-file#intercept-and-manipulate-requests">http-proxy-middleware的readme</a>中发现了相关记载。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/3aa13c5da7ea435998ff9c2ac28314c5~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image.png"></p>
 ]]></content>
       <categories>
-        <category>js</category>
+        <category>bug</category>
       </categories>
       <tags>
-        <tag>codeKey</tag>
+        <tag>node</tag>
+        <tag>502</tag>
       </tags>
   </entry>
   <entry>
@@ -889,73 +956,6 @@ fadeOut(alpha) &#123;
       </categories>
       <tags>
         <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从0到1实现一个npm库</title>
-    <url>/2023/10/11/npm-lib/</url>
-    <content><![CDATA[<h1 id="项目的目录结构"><a href="#项目的目录结构" class="headerlink" title="项目的目录结构"></a>项目的目录结构</h1><p>首先创建一个空项目，</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vue@lastest</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
-<p>然后把<code>components</code>从<code>src</code>中挪到根目录下，把<code>src</code>改名为<code>examples</code>，修改<code>index.html</code>中<code>main.ts</code>的路径。<br>具体的项目结构如下所示：</p>
-<ul>
-<li>components</li>
-<li>examples</li>
-<li>node_modules</li>
-<li>public</li>
-<li>index.html</li>
-<li>package.json</li>
-<li>vite.config.ts</li>
-</ul>
-<h1 id="导出组件"><a href="#导出组件" class="headerlink" title="导出组件"></a>导出组件</h1><p>在<code>components/index.ts</code>中定义导出的组件。<br>以下代码是导出单个组件，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">App</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&#x27;./Button&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyButtonPlugin</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">app: App</span>) =&gt;</span> &#123;</span><br><span class="line">    app.<span class="title function_">component</span>(<span class="string">&#x27;MyButton&#x27;</span>, <span class="title class_">MyButton</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyButtonPlugin</span>;</span><br></pre></td></tr></table></figure>
-<p>如果有多个组件需要导出，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/Button/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">App</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&#x27;./Button&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyButtonPlugin</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">app: App</span>) =&gt;</span> &#123;</span><br><span class="line">    app.<span class="title function_">component</span>(<span class="string">&#x27;MyButton&#x27;</span>, <span class="title class_">MyButton</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyButtonPlugin</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// components/index.ts</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyButton</span> <span class="keyword">from</span> <span class="string">&quot;./Button&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyTable</span> <span class="keyword">from</span> <span class="string">&quot;./Table&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">components</span>: any = &#123;</span><br><span class="line">  <span class="title class_">MyButton</span>,</span><br><span class="line">  <span class="title class_">MyTable</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyUI</span> = &#123;</span><br><span class="line">  <span class="attr">install</span>: <span class="function">(<span class="params">Vue: App</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(components).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title class_">Vue</span>.<span class="title function_">use</span>(components[key]);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出多个组件，方便按需引入</span></span><br><span class="line"><span class="keyword">export</span> &#123; <span class="title class_">MyButton</span>, <span class="title class_">MyTable</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyUI</span>;</span><br></pre></td></tr></table></figure>
-<p><em><code>app.use</code>用来安装插件，插件可以是具有<code>install</code>方法的对象，也可以是当作<code>install</code>方法的函数。</em></p>
-<h1 id="引入组件"><a href="#引入组件" class="headerlink" title="引入组件"></a>引入组件</h1><p>在<code>examples/main.ts</code>中使用<code>app.use</code>来安装插件，然后就可以全局使用了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 整个引入</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyUI</span> <span class="keyword">from</span> <span class="string">&#x27;../components&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">MyUI</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按需引入</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MyButton</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;../components&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">MyButton</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// App.vue</span></span><br><span class="line">&lt;my-button /&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="打包组件库"><a href="#打包组件库" class="headerlink" title="打包组件库"></a>打包组件库</h1><p>首先修改<code>package.json</code>文件，去掉<code>private</code>字段，添加<code>main</code>字段，<code>files</code>字段，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;dist/index.umd.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;files&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;dist&quot;</span>,</span><br><span class="line">    <span class="string">&quot;components&quot;</span></span><br><span class="line">  ],</span><br></pre></td></tr></table></figure>
-<p>然后修改<code>vite.config.ts</code>配置，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">build</span>: &#123;</span><br><span class="line">    <span class="attr">lib</span>: &#123;</span><br><span class="line">      <span class="attr">entry</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;components&quot;</span>),</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&quot;MyUI&quot;</span>,</span><br><span class="line">      <span class="attr">fileName</span>: <span class="function">(<span class="params">format, fileName</span>) =&gt;</span> <span class="string">`<span class="subst">$&#123;fileName&#125;</span>.<span class="subst">$&#123;format&#125;</span>.js`</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rollupOptions</span>: &#123;</span><br><span class="line">      <span class="attr">external</span>: [<span class="string">&#x27;vue&#x27;</span>],</span><br><span class="line">      <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">globals</span>: &#123;</span><br><span class="line">          <span class="attr">vue</span>: <span class="string">&#x27;Vue&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-<p>测试打包后的文件:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&#x27;../dist/index.es.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;../dist/style.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(test);</span><br></pre></td></tr></table></figure>
-<h1 id="发布库"><a href="#发布库" class="headerlink" title="发布库"></a>发布库</h1><p>如果没有<code>npm</code>账号需要先注册一下。<br>如果<code>npm</code>源不是默认源，需要修改为默认源。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm login</span><br><span class="line">npm publish</span><br></pre></td></tr></table></figure>
-<p>注：每次<code>push</code>的时候都要修改<code>package.json</code>中的<code>version</code>。</p>
-]]></content>
-      <categories>
-        <category>指南</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么只这一个接口502呢？</title>
-    <url>/2024/01/20/post-502/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前几天遇到了一个没见过的bug，在此记录一下。前几天，新写了一个页面，里面有get请求、json参数的post请求、form参数的post请求，然后把这个项目打包出来的dist放入node中。更新到线上以后，发现仅有json参数的post请求出现nginx 502报错，其他接口都正常。</p>
-<h1 id="解决问题的思路"><a href="#解决问题的思路" class="headerlink" title="解决问题的思路"></a>解决问题的思路</h1><p>刚开始搜索了一下<strong>nginx 502</strong>，没发现什么有用信息。  </p>
-<p>首先是发现其他get接口都正常，点击按钮时这个post接口报错，当时就有点懵。然后检查了同一个项目另一个post接口，发现另一个post接口也正常。所以，推理得<strong>json类型参数的post请求</strong>有问题。  </p>
-<p>本地环境，这个json参数的请求没问题，测试环境是用dist+nginx部署的，这个请求也没问题。线上环境是<strong>dist+node</strong>部署，所以就定位到了http-proxy-middleware这个库。</p>
-<p>在node+dist项目中，如果接口就是这个node的就不用代理了，但如果前端代码中请求了别的项目的接口，就需要用http-proxy-middleware添加代理配置。</p>
-<p>搜索<strong>http-proxy-middleware json请求502</strong>，就发现了解决方案。</p>
-<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h1><p>在node项目中，会使用bodyParser这个库来解析post请求的参数，这个库会改写所有post请求的body，所以前端代码请求其他项目的post请求的body也会被修改。</p>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>在代理别的项目的接口时修改body。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/myapi&#x27;</span>, <span class="title function_">createProxyMiddleware</span>(&#123;</span><br><span class="line">  <span class="attr">target</span>: <span class="string">&#x27;http://x.x.x.x:x&#x27;</span>,</span><br><span class="line">  <span class="attr">pathRewrite</span>: <span class="function">(<span class="params">path</span>) =&gt;</span> path.<span class="title function_">replace</span>(<span class="string">&quot;/myapi/&quot;</span>, <span class="string">&quot;/&quot;</span>),</span><br><span class="line">  <span class="attr">on</span>: &#123;</span><br><span class="line">    <span class="attr">proxyReq</span>: <span class="function">(<span class="params">proxyReq, req: Request, res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!req.<span class="property">body</span> || !<span class="title class_">Object</span>.<span class="title function_">keys</span>(req.<span class="property">body</span>).<span class="property">length</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> contentType = proxyReq.<span class="title function_">getHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> <span class="title function_">writeBody</span> = (<span class="params">bodyData: string</span>) =&gt; &#123;</span><br><span class="line">          proxyReq.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Length&#x27;</span>, <span class="title class_">Buffer</span>.<span class="title function_">byteLength</span>(bodyData));</span><br><span class="line">          proxyReq.<span class="title function_">write</span>(bodyData);</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (contentType === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">writeBody</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(req.<span class="property">body</span>));</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (contentType === <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">writeBody</span>(querystring.<span class="title function_">stringify</span>(req.<span class="property">body</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
-<p>在这个issue<a href="https://github.com/chimurai/http-proxy-middleware/issues/320">参考issue</a>中发现了解决办法，然后又在<a href="https://github.com/chimurai/http-proxy-middleware?tab=readme-ov-file#intercept-and-manipulate-requests">http-proxy-middleware的readme</a>中发现了相关记载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/3aa13c5da7ea435998ff9c2ac28314c5~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image.png"></p>
-]]></content>
-      <categories>
-        <category>bug</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
-        <tag>502</tag>
       </tags>
   </entry>
   <entry>
@@ -1028,25 +1028,6 @@ fadeOut(alpha) &#123;
       </categories>
       <tags>
         <tag>SSE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>给svg设置cursor不生效</title>
-    <url>/2024/02/26/svg-cursor/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>项目中一般用 svg 做小图标或背景图，背景图不需要设置 cursor， 小图标会写成单个的 IconXx.vue 文件。前不久遇到一个需求，需要展示 svg，并且可点击，这就需要设置 cursor，但直接设置不会生效。</p>
-<h1 id="svg-插入页面的方法"><a href="#svg-插入页面的方法" class="headerlink" title="svg 插入页面的方法"></a>svg 插入页面的方法</h1><p>SVG 文件可通过以下标签嵌入 HTML 文档：<code>&lt;embed&gt;</code>、<code>&lt;object&gt;</code>、<code>&lt;iframe&gt;</code>。<br>SVG的代码可以直接嵌入到HTML页面中，或您可以直接链接到SVG文件。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;circle1.svg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">&quot;circle1.svg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;circle1.svg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;100&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;40&quot;</span> <span class="attr">stroke</span>=<span class="string">&quot;black&quot;</span> <span class="attr">stroke-width</span>=<span class="string">&quot;2&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;red&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;circle1.svg&quot;</span>&gt;</span>查看 SVG 文件<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="在-svg-代码中设置-cursor"><a href="#在-svg-代码中设置-cursor" class="headerlink" title="在 svg 代码中设置 cursor"></a>在 svg 代码中设置 cursor</h1><p>这样不但可以设置整个 svg 的光标，而且可以设置里面单个元素的光标。<br>缺点是需要能修改 svg 代码。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">svg</span> &#123; <span class="attribute">cursor</span>: pointer; &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="comment">/* OR */</span></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.element-name</span> &#123; <span class="attribute">cursor</span>: pointer; &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="包裹一下-svg"><a href="#包裹一下-svg" class="headerlink" title="包裹一下 svg"></a>包裹一下 svg</h1><p>在 svg 的外层添加一层 div，给这个 div 设置光标。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;svg-wrapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;img.svg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">embed</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.svg-wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>bug</category>
-      </categories>
-      <tags>
-        <tag>svg</tag>
-        <tag>cursor</tag>
       </tags>
   </entry>
   <entry>
@@ -1387,6 +1368,88 @@ fadeOut(alpha) &#123;
       </tags>
   </entry>
   <entry>
+    <title>给svg设置cursor不生效</title>
+    <url>/2024/02/26/svg-cursor/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>项目中一般用 svg 做小图标或背景图，背景图不需要设置 cursor， 小图标会写成单个的 IconXx.vue 文件。前不久遇到一个需求，需要展示 svg，并且可点击，这就需要设置 cursor，但直接设置不会生效。</p>
+<h1 id="svg-插入页面的方法"><a href="#svg-插入页面的方法" class="headerlink" title="svg 插入页面的方法"></a>svg 插入页面的方法</h1><p>SVG 文件可通过以下标签嵌入 HTML 文档：<code>&lt;embed&gt;</code>、<code>&lt;object&gt;</code>、<code>&lt;iframe&gt;</code>。<br>SVG的代码可以直接嵌入到HTML页面中，或您可以直接链接到SVG文件。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;circle1.svg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">&quot;circle1.svg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;circle1.svg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;100&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;40&quot;</span> <span class="attr">stroke</span>=<span class="string">&quot;black&quot;</span> <span class="attr">stroke-width</span>=<span class="string">&quot;2&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;red&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;circle1.svg&quot;</span>&gt;</span>查看 SVG 文件<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="在-svg-代码中设置-cursor"><a href="#在-svg-代码中设置-cursor" class="headerlink" title="在 svg 代码中设置 cursor"></a>在 svg 代码中设置 cursor</h1><p>这样不但可以设置整个 svg 的光标，而且可以设置里面单个元素的光标。<br>缺点是需要能修改 svg 代码。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">svg</span> &#123; <span class="attribute">cursor</span>: pointer; &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="comment">/* OR */</span></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.element-name</span> &#123; <span class="attribute">cursor</span>: pointer; &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="包裹一下-svg"><a href="#包裹一下-svg" class="headerlink" title="包裹一下 svg"></a>包裹一下 svg</h1><p>在 svg 的外层添加一层 div，给这个 div 设置光标。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;svg-wrapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;img.svg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">embed</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.svg-wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>bug</category>
+      </categories>
+      <tags>
+        <tag>svg</tag>
+        <tag>cursor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>🛠如何使用CICD实现自动化部署</title>
+    <url>/2024/10/08/use-cicd-auto-deploy/</url>
+    <content><![CDATA[<h1 id="CICD"><a href="#CICD" class="headerlink" title="CICD"></a>CICD</h1><p>CICD 是“持续集成”（Continuous Integration）和“持续交付&#x2F;部署”（Continuous Delivery&#x2F;Deployment）的缩写。它是一种软件开发实践，旨在通过自动化工具和流程提高软件开发的质量和效率。</p>
+<p>持续集成要求开发人员频繁地将代码提交到共享的版本控制系统中。</p>
+<p>持续集成的流程：</p>
+<ol>
+<li>开发人员提交代码到版本控制系统（如 Git）。</li>
+<li>自动化构建系统自动拉取最新的代码。&#x20;</li>
+<li>执行自动化构建和测试。&#x20;</li>
+<li>发现并报告错误或失败的测试。</li>
+</ol>
+<p>持续交付是在持续集成的基础上进一步扩展，确保每次提交的代码都可以随时部署到生产环境中。</p>
+<p>持续交付的流程：</p>
+<ol>
+<li>自动化构建和测试。</li>
+<li>自动化部署到测试环境。</li>
+<li>手动或自动化部署到生产环境。</li>
+</ol>
+<p>持续部署是在持续交付的基础上进一步扩展，自动将通过测试的代码部署到生产环境中。</p>
+<p>持续部署的流程：</p>
+<ol>
+<li>自动化构建和测试。</li>
+<li>自动化部署到测试环境。&#x20;</li>
+<li>自动化部署到生产环境。</li>
+</ol>
+<h1 id="Github-Actions"><a href="#Github-Actions" class="headerlink" title="Github Actions"></a>Github Actions</h1><p>GitHub Actions 是 GitHub 提供的一种强大的自动化工具，用于自动化构建、测试和部署代码。它允许你在 GitHub 仓库中直接编写和运行工作流（workflows），从而实现持续集成（CI）和持续部署（CD）。</p>
+<p>Workflow：一个工作流（workflow）是由一系列步骤（steps）组成的 YAML 文件，用于定义自动化任务。</p>
+<p>Job：一个工作流可以包含一个或多个作业（job），每个作业在不同的虚拟环境中运行。</p>
+<p>Step：每个作业由一系列步骤（step）组成，每个步骤可以执行 shell 命令、运行脚本或使用预定义的动作（action）。</p>
+<p>Action：动作（action）是 GitHub Actions 中的基本构建块，可以是自定义的脚本、容器或预定义的社区动作。</p>
+<p>工作流的触发方式有很多，一般使用<strong>push</strong>。</p>
+<p>常用动作如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- name: Checkout Repository</span><br><span class="line">  uses: actions/checkout@v3 # 检出仓库中的代码</span><br><span class="line"></span><br><span class="line">- name: Setup Node.js</span><br><span class="line">  uses: actions/setup-node@v3 # 设置node环境</span><br><span class="line">  with:</span><br><span class="line">    node-version: 16</span><br><span class="line"></span><br><span class="line">- name: Install Dependencies</span><br><span class="line">  run: npm install # 运行shell脚本或命令</span><br><span class="line"></span><br><span class="line">env: # 定义环境变量</span><br><span class="line">  NODE_ENV: production</span><br><span class="line">  DATABASE_URL: $&#123;&#123; secrets.DATABASE_URL &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="创建工作流"><a href="#创建工作流" class="headerlink" title="创建工作流"></a>创建工作流</h1><p>在项目根目录下，创建文件.github&#x2F;workflows&#x2F;deploy.yml，内容如下所示，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name: Deploy to GitHub Pages # 定义工作流的名称</span><br><span class="line"></span><br><span class="line">on: # 定义触发工作流的事件，如push、pull_request等</span><br><span class="line">  push: # 当有代码推送到特定分支时触发工作流</span><br><span class="line">    branches: # 限定触发工作的分支，数组</span><br><span class="line">      - main</span><br><span class="line">	if: contains(github.event.head_commit.message, &#x27;deploy&#x27;) # 当提交一个包含 deploy 关键字的 commit 时触发</span><br><span class="line"># 以上，总的来说，在main分支提交包含 deploy 的commit 时，会触发工作流</span><br><span class="line"></span><br><span class="line">jobs: # 定义工作流中的作业（job）</span><br><span class="line">  build-and-deploy: # 定义一个名为 build-and-deploy 的作业，每个作业有一个唯一的名称</span><br><span class="line">    runs-on: ubuntu-latest # 指定作业运行的操作系统环境</span><br><span class="line"></span><br><span class="line">    steps: # 定义作业中的步骤（step）</span><br><span class="line">    - name: Checkout Repository # name 定义步骤的名称，便于识别和调试</span><br><span class="line">      uses: actions/checkout@v3 # 使用预定义的 actions/checkout 动作来检出代码。</span><br><span class="line">      # uses 后面指定动作的来源和版本，actions/checkout@v3 表示使用 actions/checkout 的第 3 版本。</span><br><span class="line"></span><br><span class="line">    - name: Setup Node.js</span><br><span class="line">      uses: actions/setup-node@v3 # 使用预定义的 actions/setup-node 动作来设置 Node.js 环境。</span><br><span class="line">      with: # 定义动作的输入参数</span><br><span class="line">        node-version: 20</span><br><span class="line">    </span><br><span class="line">    - name: Clear Cache</span><br><span class="line">      run: | # 执行 shell 命令或脚本。run 后面指定要执行的命令或脚本，| 表示多行命令。</span><br><span class="line">        rm -rf package-lock.json node_modules # 删除 package-lock.json 和 node_modules 目录。</span><br><span class="line"></span><br><span class="line">    - name: Install Dependencies</span><br><span class="line">      run: npm install # 安装项目依赖</span><br><span class="line"></span><br><span class="line">    - name: Build Project</span><br><span class="line">      run: npm run build # 构建项目</span><br><span class="line"></span><br><span class="line">    - name: Deploy to GitHub Pages</span><br><span class="line">      uses: peaceiris/actions-gh-pages@v3 # 使用预定义的 peaceiris/actions-gh-pages 动作来部署项目到 GitHub Pages。</span><br><span class="line">      with:</span><br><span class="line">        github_token: $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span><br><span class="line">        publish_dir: ./dist</span><br><span class="line">        user_name: &#x27;your name&#x27;</span><br><span class="line">        user_email: &#x27;your email&#x27;</span><br></pre></td></tr></table></figure>
+<p>另外，项目需要添加base路径配置，</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vite.config.js</span></span><br><span class="line"></span><br><span class="line"><span class="attr">base</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;/your repository/&#x27;</span> : <span class="string">&#x27;/&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>然后确保<code>Settings/Pages/Build and deployment中</code>，branch为<strong>gh-pages</strong>，目录为&#x2F;(root)。</p>
+<p>最后，通过<code>Settings/Pages/Github Pages</code>下显示的地址就可以访问项目了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007235921.png" alt="image"></p>
+<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><p>问题1：推送无权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007225937.png" alt="image"></p>
+<p>解决办法：</p>
+<p>检查权限设置，在<code>Settings/Actions/General/Workflow permissions</code>配置中，选择<code>Read and write permissions</code>。</p>
+<p>问题2：Cannot find module @rollup&#x2F;rollup-linux-x64-gnu.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007230511.png" alt="image"></p>
+<p>解决办法：</p>
+<p>清除缓存，在<strong>npm install</strong>前添加如下配置，</p>
+<pre><code>   - name: Clear Cache
+      run: |
+        rm -rf package-lock.json node_modules
+</code></pre>
+]]></content>
+      <categories>
+        <category>指南</category>
+      </categories>
+      <tags>
+        <tag>CICD</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>🧐文本溢出+完整内容提示</title>
     <url>/2024/09/25/text-ellipsis/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在开发中，经常会遇到超出省略并显示…的需求。有时，还需要做到在鼠标移入的时候显示具体内容。这些都很简单，但如果要实现“<strong>文本如果超出就在鼠标移入时显示具体内容，文本不超出鼠标移入就不显示</strong>”，就有一点点麻烦。而且，文本长度通常不固定，需要这种处理的文本有多个。所以，在此总结一下如何实现这个功能。</p>
@@ -1451,69 +1514,6 @@ fadeOut(alpha) &#123;
       </categories>
       <tags>
         <tag>文本片段</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>🛠如何使用CICD实现自动化部署</title>
-    <url>/2024/10/08/use-cicd-auto-deploy/</url>
-    <content><![CDATA[<h1 id="CICD"><a href="#CICD" class="headerlink" title="CICD"></a>CICD</h1><p>CICD 是“持续集成”（Continuous Integration）和“持续交付&#x2F;部署”（Continuous Delivery&#x2F;Deployment）的缩写。它是一种软件开发实践，旨在通过自动化工具和流程提高软件开发的质量和效率。</p>
-<p>持续集成要求开发人员频繁地将代码提交到共享的版本控制系统中。</p>
-<p>持续集成的流程：</p>
-<ol>
-<li>开发人员提交代码到版本控制系统（如 Git）。</li>
-<li>自动化构建系统自动拉取最新的代码。&#x20;</li>
-<li>执行自动化构建和测试。&#x20;</li>
-<li>发现并报告错误或失败的测试。</li>
-</ol>
-<p>持续交付是在持续集成的基础上进一步扩展，确保每次提交的代码都可以随时部署到生产环境中。</p>
-<p>持续交付的流程：</p>
-<ol>
-<li>自动化构建和测试。</li>
-<li>自动化部署到测试环境。</li>
-<li>手动或自动化部署到生产环境。</li>
-</ol>
-<p>持续部署是在持续交付的基础上进一步扩展，自动将通过测试的代码部署到生产环境中。</p>
-<p>持续部署的流程：</p>
-<ol>
-<li>自动化构建和测试。</li>
-<li>自动化部署到测试环境。&#x20;</li>
-<li>自动化部署到生产环境。</li>
-</ol>
-<h1 id="Github-Actions"><a href="#Github-Actions" class="headerlink" title="Github Actions"></a>Github Actions</h1><p>GitHub Actions 是 GitHub 提供的一种强大的自动化工具，用于自动化构建、测试和部署代码。它允许你在 GitHub 仓库中直接编写和运行工作流（workflows），从而实现持续集成（CI）和持续部署（CD）。</p>
-<p>Workflow：一个工作流（workflow）是由一系列步骤（steps）组成的 YAML 文件，用于定义自动化任务。</p>
-<p>Job：一个工作流可以包含一个或多个作业（job），每个作业在不同的虚拟环境中运行。</p>
-<p>Step：每个作业由一系列步骤（step）组成，每个步骤可以执行 shell 命令、运行脚本或使用预定义的动作（action）。</p>
-<p>Action：动作（action）是 GitHub Actions 中的基本构建块，可以是自定义的脚本、容器或预定义的社区动作。</p>
-<p>工作流的触发方式有很多，一般使用<strong>push</strong>。</p>
-<p>常用动作如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- name: Checkout Repository</span><br><span class="line">  uses: actions/checkout@v3 # 检出仓库中的代码</span><br><span class="line"></span><br><span class="line">- name: Setup Node.js</span><br><span class="line">  uses: actions/setup-node@v3 # 设置node环境</span><br><span class="line">  with:</span><br><span class="line">    node-version: 16</span><br><span class="line"></span><br><span class="line">- name: Install Dependencies</span><br><span class="line">  run: npm install # 运行shell脚本或命令</span><br><span class="line"></span><br><span class="line">env: # 定义环境变量</span><br><span class="line">  NODE_ENV: production</span><br><span class="line">  DATABASE_URL: $&#123;&#123; secrets.DATABASE_URL &#125;&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="创建工作流"><a href="#创建工作流" class="headerlink" title="创建工作流"></a>创建工作流</h1><p>在项目根目录下，创建文件.github&#x2F;workflows&#x2F;deploy.yml，内容如下所示，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name: Deploy to GitHub Pages # 定义工作流的名称</span><br><span class="line"></span><br><span class="line">on: # 定义触发工作流的事件，如push、pull_request等</span><br><span class="line">  push: # 当有代码推送到特定分支时触发工作流</span><br><span class="line">    branches: # 限定触发工作的分支，数组</span><br><span class="line">      - main</span><br><span class="line">	if: contains(github.event.head_commit.message, &#x27;deploy&#x27;) # 当提交一个包含 deploy 关键字的 commit 时触发</span><br><span class="line"># 以上，总的来说，在main分支提交包含 deploy 的commit 时，会触发工作流</span><br><span class="line"></span><br><span class="line">jobs: # 定义工作流中的作业（job）</span><br><span class="line">  build-and-deploy: # 定义一个名为 build-and-deploy 的作业，每个作业有一个唯一的名称</span><br><span class="line">    runs-on: ubuntu-latest # 指定作业运行的操作系统环境</span><br><span class="line"></span><br><span class="line">    steps: # 定义作业中的步骤（step）</span><br><span class="line">    - name: Checkout Repository # name 定义步骤的名称，便于识别和调试</span><br><span class="line">      uses: actions/checkout@v3 # 使用预定义的 actions/checkout 动作来检出代码。</span><br><span class="line">      # uses 后面指定动作的来源和版本，actions/checkout@v3 表示使用 actions/checkout 的第 3 版本。</span><br><span class="line"></span><br><span class="line">    - name: Setup Node.js</span><br><span class="line">      uses: actions/setup-node@v3 # 使用预定义的 actions/setup-node 动作来设置 Node.js 环境。</span><br><span class="line">      with: # 定义动作的输入参数</span><br><span class="line">        node-version: 20</span><br><span class="line">    </span><br><span class="line">    - name: Clear Cache</span><br><span class="line">      run: | # 执行 shell 命令或脚本。run 后面指定要执行的命令或脚本，| 表示多行命令。</span><br><span class="line">        rm -rf package-lock.json node_modules # 删除 package-lock.json 和 node_modules 目录。</span><br><span class="line"></span><br><span class="line">    - name: Install Dependencies</span><br><span class="line">      run: npm install # 安装项目依赖</span><br><span class="line"></span><br><span class="line">    - name: Build Project</span><br><span class="line">      run: npm run build # 构建项目</span><br><span class="line"></span><br><span class="line">    - name: Deploy to GitHub Pages</span><br><span class="line">      uses: peaceiris/actions-gh-pages@v3 # 使用预定义的 peaceiris/actions-gh-pages 动作来部署项目到 GitHub Pages。</span><br><span class="line">      with:</span><br><span class="line">        github_token: $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span><br><span class="line">        publish_dir: ./dist</span><br><span class="line">        user_name: &#x27;your name&#x27;</span><br><span class="line">        user_email: &#x27;your email&#x27;</span><br></pre></td></tr></table></figure>
-<p>另外，项目需要添加base路径配置，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vite.config.js</span></span><br><span class="line"></span><br><span class="line"><span class="attr">base</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;/your repository/&#x27;</span> : <span class="string">&#x27;/&#x27;</span>,</span><br></pre></td></tr></table></figure>
-
-<p>然后确保<code>Settings/Pages/Build and deployment中</code>，branch为<strong>gh-pages</strong>，目录为&#x2F;(root)。</p>
-<p>最后，通过<code>Settings/Pages/Github Pages</code>下显示的地址就可以访问项目了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007235921.png" alt="image"></p>
-<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><p>问题1：推送无权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007225937.png" alt="image"></p>
-<p>解决办法：</p>
-<p>检查权限设置，在<code>Settings/Actions/General/Workflow permissions</code>配置中，选择<code>Read and write permissions</code>。</p>
-<p>问题2：Cannot find module @rollup&#x2F;rollup-linux-x64-gnu.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20241007230511.png" alt="image"></p>
-<p>解决办法：</p>
-<p>清除缓存，在<strong>npm install</strong>前添加如下配置，</p>
-<pre><code>   - name: Clear Cache
-      run: |
-        rm -rf package-lock.json node_modules
-</code></pre>
-]]></content>
-      <categories>
-        <category>指南</category>
-      </categories>
-      <tags>
-        <tag>CICD</tag>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1758,6 +1758,61 @@ fadeOut(alpha) &#123;
       </tags>
   </entry>
   <entry>
+    <title>双端拾词助手</title>
+    <url>/2025/03/08/word-grabber/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这是一个帮助用户在日常中学习单词的软件，包含浏览器插件和微信小程序。</p>
+<p>使用流程：<br>1.安装浏览器插件；<br>2.微信扫码登录小程序；<br>3.在网页中选中单词，即可获取翻译结果，可以收藏或取消收藏该单词；<br>4.在微信小程序中复习单词；</p>
+<p>浏览器插件：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/%E6%8D%95%E8%8E%B7.PNG" alt="收藏">    </p>
+<p>微信小程序：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20250308231025.png" alt="小程序"></p>
+<h1 id="开发浏览器插件注意事项"><a href="#开发浏览器插件注意事项" class="headerlink" title="开发浏览器插件注意事项"></a>开发浏览器插件注意事项</h1><h2 id="content-js与background-js的区别"><a href="#content-js与background-js的区别" class="headerlink" title="content.js与background.js的区别"></a>content.js与background.js的区别</h2><p>content.js：</p>
+<ul>
+<li>直接与网页内容交互，可以修改网页结构、监听用户点击事件等；</li>
+<li>无法访问页面的js变量或函数，请求受同源策略限制；</li>
+<li>仅能调用部分Chrome API，如chrome.runtime.sendMessage、chrome.storage；</li>
+<li>无法直接访问chrome.tabs或chrome.windows等涉及浏览器全局操作的API</li>
+</ul>
+<p>background.js：</p>
+<ul>
+<li>作为全局后台服务，负责处理跨域请求、调用高权限API（通知推送、浏览器标签管理等）；</li>
+<li>生命周期与浏览器同步，支持跨域访问；</li>
+<li>可调用所有Chrome API；</li>
+</ul>
+<h2 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h2><p>content -&gt; background</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// content script发送消息</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="title function_">sendMessage</span>(&#123; <span class="attr">action</span>: <span class="string">&quot;fetchData&quot;</span> &#125;, <span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到后台响应:&quot;</span>, response);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// background script监听</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">request, sender, sendResponse</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (request.<span class="property">action</span> === <span class="string">&quot;fetchData&quot;</span>) &#123;</span><br><span class="line">    <span class="title function_">sendResponse</span>(&#123; <span class="attr">data</span>: <span class="string">&quot;来自后台的数据&quot;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>background -&gt; content<br>需通过chrome.tabs.sendMessage指定目标标签页</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chrome.tabs.query(&#123; active: true &#125;, tabs =&gt; &#123;</span><br><span class="line">  chrome.tabs.sendMessage(tabs[0].id, &#123; action: &quot;updateUI&quot; &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="storage存储数据"><a href="#storage存储数据" class="headerlink" title="storage存储数据"></a>storage存储数据</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 存储</span></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">set</span>(&#123; <span class="attr">info</span>: <span class="string">&#x27;abc&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取</span></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">get</span>([<span class="string">&#x27;info&#x27;</span>], <span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 监听扩展安装和更新事件</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听扩展启动事件</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onStartup</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="开发微信小程序注意事项"><a href="#开发微信小程序注意事项" class="headerlink" title="开发微信小程序注意事项"></a>开发微信小程序注意事项</h1><h2 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h2><p>微信扫码登录小程序的流程如下：</p>
+<ol>
+<li>服务端根据scene从小程序API获取二维码；</li>
+<li>浏览器插件从服务端获取并展示二维码，轮询是否登录；</li>
+<li>手机扫描二维码，微信小程序可以从query中拿到scene。登录后拿到token，请求登录接口，返回scene和token；</li>
+<li>服务端以scene为key记录是否登录。缓存scene和token，查询是否登录根据sessionStorage中的数据判断；</li>
+<li>浏览器插件查询到已登录，结束轮询；</li>
+</ol>
+<p>主要代码如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取accessToken</span></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="subst">$&#123;appid&#125;</span>&amp;secret=<span class="subst">$&#123;secret&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据accessToken获取二维码</span></span><br><span class="line"><span class="keyword">const</span> scene = <span class="title function_">randomBytes</span>(<span class="number">16</span>).<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">`https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=<span class="subst">$&#123;accessToken&#125;</span>`</span>, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">      scene,</span><br><span class="line">      <span class="attr">width</span>: <span class="number">200</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">await</span> response.<span class="title function_">arrayBuffer</span>();</span><br><span class="line"><span class="keyword">const</span> base64Image = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(buffer).<span class="title function_">toString</span>(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">jsonSuccess</span>(&#123;</span><br><span class="line">    <span class="attr">qrcode</span>: <span class="string">`data:image/png;base64,<span class="subst">$&#123;base64Image&#125;</span>`</span>,</span><br><span class="line">    scene,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><p><code>wx.getUserInfo</code>和<code>wx.getUserProfile</code>已经被废弃，无法拿到用户头像和昵称。</p>
+<p>需要让用户自己选择头像和昵称。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 用户信息弹窗 --&gt;</span><br><span class="line">&lt;view class=&quot;user-info-modal&quot; wx:if=&quot;&#123;&#123;isLoggedIn &amp;&amp; (!userName || !userAvatar)&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;view class=&quot;user-info-content&quot;&gt;</span><br><span class="line">    &lt;button class=&quot;avatar-wrapper&quot; open-type=&quot;chooseAvatar&quot; bind:chooseavatar=&quot;onChooseAvatar&quot;&gt;</span><br><span class="line">      &lt;image class=&quot;avatar&quot; src=&quot;&#123;&#123;userAvatar&#125;&#125;&quot;&gt;&lt;/image&gt;</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;input type=&quot;nickname&quot; class=&quot;weui-input&quot; placeholder=&quot;请输入昵称&quot; bindinput=&quot;onInputName&quot; /&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="上传微信头像"><a href="#上传微信头像" class="headerlink" title="上传微信头像"></a>上传微信头像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const &#123; userName, userAvatar, scene &#125; = this.data</span><br><span class="line">wx.uploadFile(&#123;</span><br><span class="line">  url: &#x27;xx&#x27;,</span><br><span class="line">  filePath: userAvatar,</span><br><span class="line">  name: &#x27;file&#x27;,</span><br><span class="line">  formData: &#123;</span><br><span class="line">    openid: wx.getStorageSync(&#x27;token&#x27;),</span><br><span class="line">    scene,</span><br><span class="line">    nickname: userName</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这是一个日常用得上的项目，又锻炼了开发浏览器插件、微信小程序、node。最复杂的是扫码登录那块。</p>
+<p>ps: 因为发布浏览器插件需要付费，so…</p>
+]]></content>
+      <categories>
+        <category>指南</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+        <tag>浏览器插件</tag>
+        <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>📢彻底了解Vu3的watchEffect和watch</title>
     <url>/2024/11/19/watch/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我经常使用<code>watch</code>和<code>watcheffect</code>，但前几天遇到一个稍微复杂点的功能，就出现了意料之外的情况，感觉对它们了解的还不够。所以，在此详细探索一下它们。</p>
@@ -1851,64 +1906,6 @@ fadeOut(alpha) &#123;
       <tags>
         <tag>vue</tag>
         <tag>watch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>双端拾词助手</title>
-    <url>/2025/03/08/word-grabber/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这是一个帮助用户在日常中学习单词的软件，包含浏览器插件和微信小程序。</p>
-<p>使用流程：<br>1.安装浏览器插件；<br>2.微信扫码登录小程序；<br>3.在网页中选中单词，即可获取翻译结果，可以收藏或取消收藏该单词；<br>4.在微信小程序中复习单词；</p>
-<p>浏览器插件：<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/%E6%8D%95%E8%8E%B7.PNG" alt="收藏">    </p>
-<p>微信小程序：</p>
-<div align="center">
-  <img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/_cgi-bin_mmwebwx-bin_webwxgetmsgimg__&MsgID=2939459660525401730&skey=@crypt_cdc12483_e19fff210baa331bceb7d5e632dfe330&mmweb_appid=wx_webfilehelper.jfif" width="45%"/>
-  <img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/_cgi-bin_mmwebwx-bin_webwxgetmsgimg__&MsgID=4690506725294686158&skey=@crypt_cdc12483_e19fff210baa331bceb7d5e632dfe330&mmweb_appid=wx_webfilehelper.jfif" width="45%"/>
-</div>
-
-<h1 id="开发浏览器插件注意事项"><a href="#开发浏览器插件注意事项" class="headerlink" title="开发浏览器插件注意事项"></a>开发浏览器插件注意事项</h1><h2 id="content-js与background-js的区别"><a href="#content-js与background-js的区别" class="headerlink" title="content.js与background.js的区别"></a>content.js与background.js的区别</h2><p>content.js：</p>
-<ul>
-<li>直接与网页内容交互，可以修改网页结构、监听用户点击事件等；</li>
-<li>无法访问页面的js变量或函数，请求受同源策略限制；</li>
-<li>仅能调用部分Chrome API，如chrome.runtime.sendMessage、chrome.storage；</li>
-<li>无法直接访问chrome.tabs或chrome.windows等涉及浏览器全局操作的API</li>
-</ul>
-<p>background.js：</p>
-<ul>
-<li>作为全局后台服务，负责处理跨域请求、调用高权限API（通知推送、浏览器标签管理等）；</li>
-<li>生命周期与浏览器同步，支持跨域访问；</li>
-<li>可调用所有Chrome API；</li>
-</ul>
-<h2 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h2><p>content -&gt; background</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// content script发送消息</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="title function_">sendMessage</span>(&#123; <span class="attr">action</span>: <span class="string">&quot;fetchData&quot;</span> &#125;, <span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到后台响应:&quot;</span>, response);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// background script监听</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">request, sender, sendResponse</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (request.<span class="property">action</span> === <span class="string">&quot;fetchData&quot;</span>) &#123;</span><br><span class="line">    <span class="title function_">sendResponse</span>(&#123; <span class="attr">data</span>: <span class="string">&quot;来自后台的数据&quot;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>background -&gt; content<br>需通过chrome.tabs.sendMessage指定目标标签页</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chrome.tabs.query(&#123; active: true &#125;, tabs =&gt; &#123;</span><br><span class="line">  chrome.tabs.sendMessage(tabs[0].id, &#123; action: &quot;updateUI&quot; &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="storage存储数据"><a href="#storage存储数据" class="headerlink" title="storage存储数据"></a>storage存储数据</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 存储</span></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">set</span>(&#123; <span class="attr">info</span>: <span class="string">&#x27;abc&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取</span></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">get</span>([<span class="string">&#x27;info&#x27;</span>], <span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 监听扩展安装和更新事件</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听扩展启动事件</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onStartup</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h1 id="开发微信小程序注意事项"><a href="#开发微信小程序注意事项" class="headerlink" title="开发微信小程序注意事项"></a>开发微信小程序注意事项</h1><h2 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h2><p>微信扫码登录小程序的流程如下：</p>
-<ol>
-<li>服务端根据scene从小程序API获取二维码；</li>
-<li>浏览器插件从服务端获取并展示二维码，轮询是否登录；</li>
-<li>手机扫描二维码，微信小程序可以从query中拿到scene。登录后拿到token，请求登录接口，返回scene和token；</li>
-<li>服务端以scene为key记录是否登录。缓存scene和token，查询是否登录根据sessionStorage中的数据判断；</li>
-<li>浏览器插件查询到已登录，结束轮询；</li>
-</ol>
-<p>主要代码如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取accessToken</span></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="subst">$&#123;appid&#125;</span>&amp;secret=<span class="subst">$&#123;secret&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据accessToken获取二维码</span></span><br><span class="line"><span class="keyword">const</span> scene = <span class="title function_">randomBytes</span>(<span class="number">16</span>).<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">`https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=<span class="subst">$&#123;accessToken&#125;</span>`</span>, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">      scene,</span><br><span class="line">      <span class="attr">width</span>: <span class="number">200</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">await</span> response.<span class="title function_">arrayBuffer</span>();</span><br><span class="line"><span class="keyword">const</span> base64Image = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(buffer).<span class="title function_">toString</span>(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">jsonSuccess</span>(&#123;</span><br><span class="line">    <span class="attr">qrcode</span>: <span class="string">`data:image/png;base64,<span class="subst">$&#123;base64Image&#125;</span>`</span>,</span><br><span class="line">    scene,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><p><code>wx.getUserInfo</code>和<code>wx.getUserProfile</code>已经被废弃，无法拿到用户头像和昵称。</p>
-<p>需要让用户自己选择头像和昵称。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 用户信息弹窗 --&gt;</span><br><span class="line">&lt;view class=&quot;user-info-modal&quot; wx:if=&quot;&#123;&#123;isLoggedIn &amp;&amp; (!userName || !userAvatar)&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;view class=&quot;user-info-content&quot;&gt;</span><br><span class="line">    &lt;button class=&quot;avatar-wrapper&quot; open-type=&quot;chooseAvatar&quot; bind:chooseavatar=&quot;onChooseAvatar&quot;&gt;</span><br><span class="line">      &lt;image class=&quot;avatar&quot; src=&quot;&#123;&#123;userAvatar&#125;&#125;&quot;&gt;&lt;/image&gt;</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;input type=&quot;nickname&quot; class=&quot;weui-input&quot; placeholder=&quot;请输入昵称&quot; bindinput=&quot;onInputName&quot; /&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="上传微信头像"><a href="#上传微信头像" class="headerlink" title="上传微信头像"></a>上传微信头像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const &#123; userName, userAvatar, scene &#125; = this.data</span><br><span class="line">wx.uploadFile(&#123;</span><br><span class="line">  url: &#x27;xx&#x27;,</span><br><span class="line">  filePath: userAvatar,</span><br><span class="line">  name: &#x27;file&#x27;,</span><br><span class="line">  formData: &#123;</span><br><span class="line">    openid: wx.getStorageSync(&#x27;token&#x27;),</span><br><span class="line">    scene,</span><br><span class="line">    nickname: userName</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这是一个日常用得上的项目，又锻炼了开发浏览器插件、微信小程序、node。最复杂的是扫码登录那块。</p>
-<p>ps: 因为发布浏览器插件需要付费，so…</p>
-]]></content>
-      <categories>
-        <category>指南</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
-        <tag>浏览器插件</tag>
-        <tag>微信小程序</tag>
       </tags>
   </entry>
   <entry>
