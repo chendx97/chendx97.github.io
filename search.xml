@@ -74,6 +74,21 @@
       </tags>
   </entry>
   <entry>
+    <title>npm error-could not determine executable to run</title>
+    <url>/2024/10/10/could-not-determine-executable-to-run/</url>
+    <content><![CDATA[<h1 id="遇见问题"><a href="#遇见问题" class="headerlink" title="遇见问题"></a>遇见问题</h1><p>在用我自己的脚手架创建项目时，遇到了一个报错，但别人同样的操作没有报错。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image.png" alt="报错信息"><br>然后打开.log文件，看到了更详细一点的报错信息。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(1).png" alt="报错2"></p>
+<h1 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h1><p>搜索<code>Error: could not determine executable to run</code>和<code>getBinFromManifest</code>发现，并没有明确的原因，很多人解决的方法<a href="https://stackoverflow.com/questions/67833794/npm-err-could-not-determine-executable-to-run">（解决方案集合）</a>都完全不一样。我一一都试了也不行。<br>然后再看报错信息的后面几行，发现了有什么地方不对劲，<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(2).png" alt="报错3"><br>我要使用的<code>create-pro</code>的版本根本不是0.0.0，而打开第14行的链接，这个npm包也不是我要用的那个。我的库是放在某个scope下的，这个链接指向的包与我的包同名，但不在scope内。<br>但是我要用的库已经全局安装过了，不明白为什么npm拉错了包。</p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># npm create pro // 原命令</span></span><br><span class="line">npm create @chen/pro // √</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遇到这个报错的时候，如果也是使用脚手架，可以看看包是否在scope内。不然，可以先看看命令有没有语法错误，然后试试重启vscode、重新安装依赖、赋予当前用户对node完全控制的权限等方法。</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【翻译】如何实现一个纯CSS计时器</title>
     <url>/2024/06/17/css-timer/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有时我们会在页面上使用计时器。通常我们会用js实现计时器功能，但某些时候更适合用css，比如某些邮件客户端不支持运行js。</p>
@@ -125,21 +140,6 @@
       </categories>
       <tags>
         <tag>timer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>npm error-could not determine executable to run</title>
-    <url>/2024/10/10/could-not-determine-executable-to-run/</url>
-    <content><![CDATA[<h1 id="遇见问题"><a href="#遇见问题" class="headerlink" title="遇见问题"></a>遇见问题</h1><p>在用我自己的脚手架创建项目时，遇到了一个报错，但别人同样的操作没有报错。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image.png" alt="报错信息"><br>然后打开.log文件，看到了更详细一点的报错信息。<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(1).png" alt="报错2"></p>
-<h1 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h1><p>搜索<code>Error: could not determine executable to run</code>和<code>getBinFromManifest</code>发现，并没有明确的原因，很多人解决的方法<a href="https://stackoverflow.com/questions/67833794/npm-err-could-not-determine-executable-to-run">（解决方案集合）</a>都完全不一样。我一一都试了也不行。<br>然后再看报错信息的后面几行，发现了有什么地方不对劲，<br><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/image%20(2).png" alt="报错3"><br>我要使用的<code>create-pro</code>的版本根本不是0.0.0，而打开第14行的链接，这个npm包也不是我要用的那个。我的库是放在某个scope下的，这个链接指向的包与我的包同名，但不在scope内。<br>但是我要用的库已经全局安装过了，不明白为什么npm拉错了包。</p>
-<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># npm create pro // 原命令</span></span><br><span class="line">npm create @chen/pro // √</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遇到这个报错的时候，如果也是使用脚手架，可以看看包是否在scope内。不然，可以先看看命令有没有语法错误，然后试试重启vscode、重新安装依赖、赋予当前用户对node完全控制的权限等方法。</p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
