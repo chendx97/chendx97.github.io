@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>知识点总结（一） | 河豚的前端之路</title><meta name="author" content="河豚"><meta name="copyright" content="河豚"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="好记性不如烂笔头。把遇到的不常见的知识点都记录下来，避免下次再遇到时还不理解。总结一下也能加深自己的印象。 clearTimeout执行clearTimeout(timer)后，定时器回调不会执行，但timer的值不变。 防抖：事件触发后等待指定时间，若期间没有再次触发，则执行函数；若期间重复触发，则重新计时。 123456789const debounce &#x3D; (func, wait) &#x3D;&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识点总结（一）">
+<meta property="og:url" content="https://chendx97.github.io/2025/06/02/summary1/index.html">
+<meta property="og:site_name" content="河豚的前端之路">
+<meta property="og:description" content="好记性不如烂笔头。把遇到的不常见的知识点都记录下来，避免下次再遇到时还不理解。总结一下也能加深自己的印象。 clearTimeout执行clearTimeout(timer)后，定时器回调不会执行，但timer的值不变。 防抖：事件触发后等待指定时间，若期间没有再次触发，则执行函数；若期间重复触发，则重新计时。 123456789const debounce &#x3D; (func, wait) &#x3D;&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/202506021436473.png">
+<meta property="article:published_time" content="2025-06-02T06:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-02T06:36:56.069Z">
+<meta property="article:author" content="河豚">
+<meta property="article:tag" content="河豚,前端,技术分享,前端开发,vue3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/202506021436473.png"><link rel="shortcut icon" href="/imgs/favicon.ico"><link rel="canonical" href="https://chendx97.github.io/2025/06/02/summary1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="HljFIBvOBSafm6cxK-G9vaYmyeliHlbLa1vm7F6gsSc"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EBK06Q8TES"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-EBK06Q8TES')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-EBK06Q8TES', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '知识点总结（一）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/custom.css"><script type="text/javascript" src="/baidu.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/imgs/logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-file-code"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/imgs/logo.png" alt="Logo"><span class="site-name">河豚的前端之路</span></a><a class="nav-page-title" href="/"><span class="site-name">知识点总结（一）</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-file-code"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">知识点总结（一）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-02T06:00:00.000Z" title="发表于 2025-06-02 14:00:00">2025-06-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-02T06:36:56.069Z" title="更新于 2025-06-02 14:36:56">2025-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>好记性不如烂笔头。把遇到的不常见的知识点都记录下来，避免下次再遇到时还不理解。总结一下也能加深自己的印象。</p>
+<h2 id="clearTimeout"><a href="#clearTimeout" class="headerlink" title="clearTimeout"></a>clearTimeout</h2><p><strong>执行clearTimeout(timer)后，定时器回调不会执行，但timer的值不变。</strong></p>
+<p><strong>防抖</strong>：事件触发后等待指定时间，若期间没有再次触发，则执行函数；若期间重复触发，则重新计时。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">debounce</span> = (<span class="params">func, wait</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      func.<span class="title function_">apply</span>(<span class="literal">null</span>, args);</span><br><span class="line">    &#125;, wait);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>节流</strong>：在指定时间间隔内，无论触发多少次，函数只执行一次。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">throttle</span> = (<span class="params">func, wait</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> lastTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">const</span> remaining = wait - (now - lastTime);</span><br><span class="line">    <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      func.<span class="title function_">apply</span>(<span class="literal">null</span>, args);</span><br><span class="line">      lastTime = now;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) &#123;</span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        func.<span class="title function_">apply</span>(<span class="literal">null</span>, args);</span><br><span class="line">        lastTime = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">      &#125;, remaining);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="line-break"><a href="#line-break" class="headerlink" title="line-break"></a>line-break</h2><p><code>line-break</code>属性控制标点符号、单词、连续字符在行尾的换行方式，尤其影响：</p>
+<ul>
+<li>标点（如句号、逗号）能否出现在行首&#x2F;行尾</li>
+<li>连续字母或数字（如长单词、URL）是否允许断开</li>
+<li>中文&#x2F;日文文本的换行规则</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.element</span> &#123;</span><br><span class="line">  <span class="attribute">line-break</span>: auto | loose | normal | strict | anywhere;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1. <code>auto</code> (默认值)</strong><br>行为：浏览器根据文本语言自动选择换行规则<br>示例：中文文本默认允许标点出现在行首，英文则更倾向于避免断开单词</p>
+<p><strong>2. <code>loose</code></strong><br>行为：宽松换行，允许更多换行机会<br>适用场景：短行文本（如报纸排版）<br>特点：<br>允许标点出现在行首<br>更频繁断开长单词或连续字符</p>
+<p><strong>3. <code>normal</code></strong><br>行为：使用标准换行规则（介于 loose 和 strict 之间）<br>特点：<br>标点通常不出现在行首<br>仅在允许断点处换行</p>
+<p><strong>4. <code>strict</code></strong><br>行为：严格换行，遵循排版规范（如 CSS Text Module Level 3）<br>特点：<br>禁止标点出现在行首<br>仅在明确允许的断点换行</p>
+<p><strong>5. <code>anywhere</code> (谨慎使用)</strong><br>行为：任意位置均可换行（类似 word-break: break-all）<br>特点：<br>无视语言规则，强制在字符间换行<br>可能导致单词中间断开</p>
+<h2 id="JSON-stringify"><a href="#JSON-stringify" class="headerlink" title="JSON.stringify"></a>JSON.stringify</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(value[, replacer[, space]])</span><br></pre></td></tr></table></figure>
+<p>接收3个参数。<br>第一个参数要处理的对象；</p>
+<p>第二个参数处理对象的属性，可以是函数或数组。函数参数为key和value，返回undefined代表过滤掉该属性，返回其他值代表替换原属性值。数组为字符串数组，表示仅返回数组中的属性，顶层属性。</p>
+<p>第三个参数控制缩进和格式化，可以是数字或字符串。数字为每级缩进空格数，大于10截断。字符串表示用该字符串作为缩进符。</p>
+<h2 id="切换node版本"><a href="#切换node版本" class="headerlink" title="切换node版本"></a>切换node版本</h2><p>方法1：nvm<br>修改启动命令</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;nvm use v18.20.4 &amp;&amp; vite&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>方法2：nvm-desktop<br><a target="_blank" rel="noopener" href="https://github.com/1111mp/nvm-desktop">nvm-desktop github</a></p>
+<h2 id="linux命令"><a href="#linux命令" class="headerlink" title="linux命令"></a>linux命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除非空目录</span></span><br><span class="line"><span class="built_in">rm</span> -r /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动文件夹</span></span><br><span class="line"><span class="built_in">mv</span> /path/from/ ./</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名文件夹</span></span><br><span class="line"><span class="built_in">mv</span> xx yy</span><br></pre></td></tr></table></figure>
+<h2 id="nginx-504"><a href="#nginx-504" class="headerlink" title="nginx 504"></a>nginx 504</h2><p>原因：请求超时</p>
+<p>解决方案：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /api &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://backend_server;  <span class="comment"># 上游服务器地址</span></span><br><span class="line">    <span class="attribute">proxy_read_timeout</span> <span class="number">300s</span>;     <span class="comment"># 默认60秒，调整为300秒（按需）</span></span><br><span class="line">    <span class="attribute">proxy_connect_timeout</span> <span class="number">75s</span>;   <span class="comment"># 连接上游服务器的超时时间</span></span><br><span class="line">    <span class="attribute">proxy_send_timeout</span> <span class="number">60s</span>;      <span class="comment"># 发送请求到上游服务器的超时</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="FontFace文件路径问题"><a href="#FontFace文件路径问题" class="headerlink" title="FontFace文件路径问题"></a>FontFace文件路径问题</h2><p><code>FontFace</code>用于动态加载字体。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> font = <span class="keyword">new</span> <span class="title class_">FontFace</span>(<span class="string">&#x27;iconfont&#x27;</span>, <span class="string">&#x27;url(./src/assets/fonts/iconfont.woff)&#x27;</span>);</span><br><span class="line"><span class="keyword">await</span> font.<span class="title function_">load</span>();</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">fonts</span>.<span class="title function_">add</span>(font);</span><br></pre></td></tr></table></figure>
+
+<p>虽然以上代码在与assets同级的App.vue中，但url前面是 &#x3D;&#x3D;.&#x2F;src&#x2F;assets&#x3D;&#x3D;，其他都不行。原因未知。<br>font文件放public下用绝对路径也访问不到，只能这样。<br>如果不知道怎么能访问到字体文件，可以用@font-face加载一个字体文件，在network中看看这个文件的url是什么样。</p>
+<h2 id="vuex的mutation调用"><a href="#vuex的mutation调用" class="headerlink" title="vuex的mutation调用"></a>vuex的mutation调用</h2><p>mutation只能接收2个固定参数，第一个是state，第二个是payload。如果尝试传递多个参数，只有第一个会传递成功，其他参数被忽略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mutations</span>: &#123;</span><br><span class="line">    <span class="title function_">setUserInfo</span>(<span class="params">state, &#123; isSuper, adminList, userList &#125;</span>) &#123;</span><br><span class="line">      state.<span class="property">isSuper</span> = isSuper;</span><br><span class="line">      state.<span class="property">adminList</span> = adminList;</span><br><span class="line">      state.<span class="property">userList</span> = userList;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br><span class="line">  </span><br><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">    ...<span class="title function_">mapMutations</span>([<span class="string">&#x27;setIsLoginVisible&#x27;</span>, <span class="string">&#x27;setUserInfo&#x27;</span>]),</span><br><span class="line">    <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setUserInfo</span>(&#123;</span><br><span class="line">            <span class="attr">isSuper</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">adminList</span>: [],</span><br><span class="line">            <span class="attr">userList</span>: []                </span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="下载Blob格式压缩包时报错"><a href="#下载Blob格式压缩包时报错" class="headerlink" title="下载Blob格式压缩包时报错"></a>下载Blob格式压缩包时报错</h2><p>即使页面是 HTTP，某些浏览器也会将 Blob URL 识别为潜在风险</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([data], &#123;<span class="attr">type</span>: <span class="string">&#x27;application/zip&#x27;</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> url = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob); <span class="comment">// 可能触发警告</span></span><br></pre></td></tr></table></figure>
+
+<p>解决方案：改用 Base64 下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const reader = new FileReader();</span><br><span class="line">reader.onload = () =&gt; &#123;</span><br><span class="line">  const link = document.createElement(&#x27;a&#x27;);</span><br><span class="line">  link.href = reader.result;</span><br><span class="line">  link.download = &#x27;file.zip&#x27;;</span><br><span class="line">  link.click();</span><br><span class="line">&#125;;</span><br><span class="line">reader.readAsDataURL(blob);</span><br></pre></td></tr></table></figure>
+<h2 id="npm-login时报错Public-registration-is-not-allowed"><a href="#npm-login时报错Public-registration-is-not-allowed" class="headerlink" title="npm login时报错Public registration is not allowed"></a>npm login时报错Public registration is not allowed</h2><p>由于使用了不支持公开注册的npm镜像源导致。例如淘宝镜像（registry.npmmirror.com）默认禁止公共账号注册和登录操作。</p>
+<p>解决办法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 临时方案（仅当前命令生效）</span></span><br><span class="line">npm login --registry=https://registry.npmjs.org/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久方案（修改全局配置）</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure>
+<h2 id="与搭配"><a href="#与搭配" class="headerlink" title="与搭配"></a><el-scrollbar>与<el-backtop>搭配</h2><p><code>&lt;el-backtop&gt;</code>需要放<code>在&lt;el-scrollbar&gt;</code>里面，而且target为 <strong>.el-scrollbar__wrap</strong>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-scrollbar</span> <span class="attr">height</span>=<span class="string">&quot;calc(100vh - 210px)&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SimilarItem</span> <span class="attr">v-for</span>=<span class="string">&quot;item in searchResult&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span> <span class="attr">:info</span>=<span class="string">&quot;item&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-backtop</span> <span class="attr">target</span>=<span class="string">&quot;.el-scrollbar__wrap&quot;</span> <span class="attr">:right</span>=<span class="string">&quot;100&quot;</span> <span class="attr">:bottom</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-scrollbar</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="disabled-devtool使用"><a href="#disabled-devtool使用" class="headerlink" title="disabled-devtool使用"></a>disabled-devtool使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">DisableDevtool</span>.<span class="title function_">md5</span>(<span class="string">&#x27;xxxx&#x27;</span>) <span class="comment">// 无用</span></span><br><span class="line"><span class="title class_">DisableDevtool</span>(&#123; </span><br><span class="line">  <span class="attr">md5</span>: <span class="string">&#x27;xx&#x27;</span>, <span class="comment">// 生效，32位小写</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://chendx97.github.io">河豚</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://chendx97.github.io/2025/06/02/summary1/">https://chendx97.github.io/2025/06/02/summary1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://chendx97.github.io" target="_blank">河豚的前端之路</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/202506021436473.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/05/27/login-github/" title="🔔 如何接入github登录"><img class="cover" src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20250527224028.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">🔔 如何接入github登录</div></div><div class="info-2"><div class="info-item-1">github登录通过OAuth协议接入第三方平台，用户无需注册新账号。下面详细介绍一下接入流程。 创建 GitHub OAuth 应用访问 GitHub Developer Settings 创建新应用。填写 Application name、Homepage URL、Authorization callback URL。保存生成的Client ID 和 Client Secret。 &#x3D;&#x3D;！Client Secret 需要另外记录下来，它只在生成的时候可见。&#x3D;&#x3D; 跳转到授权页123const handleLogin = () =&gt; &#123;  window.location.href = &#x27;https://github.com/login/oauth/authorize?client_id=Ov23li276DdOmpC29BIR&amp;scope=read:user&#x27;;&#125; 判断是否登录，如果没有登录则跳转到 github 的登录授权页。 授权后返回code第一步填写了Authorization...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/imgs/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">河豚</div><div class="author-info-description">记录和分享前端技术</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chendx97"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/chendx97" target="_blank" title="Github"><i class="fab fa-github" style="color: #1f2328;"></i></a><a class="social-icon" href="https://juejin.cn/user/638161460403287/" target="_blank" title="掘金"><i class="fas fa-fish" style="color: #007fff;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#clearTimeout"><span class="toc-number">1.</span> <span class="toc-text">clearTimeout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-break"><span class="toc-number">2.</span> <span class="toc-text">line-break</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-stringify"><span class="toc-number">3.</span> <span class="toc-text">JSON.stringify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2node%E7%89%88%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">切换node版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">linux命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx-504"><span class="toc-number">6.</span> <span class="toc-text">nginx 504</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FontFace%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="toc-number">7.</span> <span class="toc-text">FontFace文件路径问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex%E7%9A%84mutation%E8%B0%83%E7%94%A8"><span class="toc-number">8.</span> <span class="toc-text">vuex的mutation调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDBlob%E6%A0%BC%E5%BC%8F%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%97%B6%E6%8A%A5%E9%94%99"><span class="toc-number">9.</span> <span class="toc-text">下载Blob格式压缩包时报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-login%E6%97%B6%E6%8A%A5%E9%94%99Public-registration-is-not-allowed"><span class="toc-number">10.</span> <span class="toc-text">npm login时报错Public registration is not allowed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E6%90%AD%E9%85%8D"><span class="toc-number">11.</span> <span class="toc-text">与搭配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#disabled-devtool%E4%BD%BF%E7%94%A8"><span class="toc-number">12.</span> <span class="toc-text">disabled-devtool使用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/06/02/summary1/" title="知识点总结（一）"><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/202506021436473.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识点总结（一）"/></a><div class="content"><a class="title" href="/2025/06/02/summary1/" title="知识点总结（一）">知识点总结（一）</a><time datetime="2025-06-02T06:00:00.000Z" title="发表于 2025-06-02 14:00:00">2025-06-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/27/login-github/" title="🔔 如何接入github登录"><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20250527224028.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🔔 如何接入github登录"/></a><div class="content"><a class="title" href="/2025/05/27/login-github/" title="🔔 如何接入github登录">🔔 如何接入github登录</a><time datetime="2025-05-27T14:30:00.000Z" title="发表于 2025-05-27 22:30:00">2025-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/25/maplibre-guide/" title="💎 使用 Maplibre 开发地图"><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20250527223929.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="💎 使用 Maplibre 开发地图"/></a><div class="content"><a class="title" href="/2025/05/25/maplibre-guide/" title="💎 使用 Maplibre 开发地图">💎 使用 Maplibre 开发地图</a><time datetime="2025-05-25T14:00:00.000Z" title="发表于 2025-05-25 22:00:00">2025-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/21/download-big-file/" title="🎀用流式写入处理大文件下载"><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/cover%20(3).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🎀用流式写入处理大文件下载"/></a><div class="content"><a class="title" href="/2025/04/21/download-big-file/" title="🎀用流式写入处理大文件下载">🎀用流式写入处理大文件下载</a><time datetime="2025-04-21T13:30:00.000Z" title="发表于 2025-04-21 21:30:00">2025-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/08/word-grabber/" title="双端拾词助手"><img src="https://cdn.jsdelivr.net/gh/chendx97/CPics/img/20250308231025.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="双端拾词助手"/></a><div class="content"><a class="title" href="/2025/03/08/word-grabber/" title="双端拾词助手">双端拾词助手</a><time datetime="2025-03-08T15:00:00.000Z" title="发表于 2025-03-08 23:00:00">2025-03-08</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 河豚</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><img src="/imgs/beian.png" alt="备案" style="height: 20px;vertical-align: middle;"> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=33010502012208" rel="noreferrer" target="_blank" style="vertical-align: middle;">浙公网安备33010502012208号</a> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="vertical-align: middle;"><span>浙ICP备2025152522号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
+  }
+
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'chendx97/blog-comments',
+      'data-repo-id': 'R_kgDONj79eQ',
+      'data-category-id': 'DIC_kwDONj79ec4ClnDx',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
